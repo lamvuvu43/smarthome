@@ -8,7 +8,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <link rel="{{asset('public/css/home_page.css')}}">
+    <link href="{{asset('css/home_page.css')}}" rel="stylesheet">
 </head>
 <body>
 
@@ -25,21 +25,36 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-12 col-md-3 col-lg-3 location loc-1">
-            Phòng khách
+        <div class="col-sm-12 col-md-6 col-lg-3 location loc-1 ">
+            <div class="location-content ">Phòng khách</div>
         </div>
-        <div class="col-sm-12 col-md-3 col-lg-3 location col-2">
-            Phòng ngủ 1
+        <div class="col-sm-12 col-md-6 col-lg-3 location loc-2">
+            <div class="location-content "> Phòng ngủ 1</div>
         </div>
-        <div class="col-sm-12 col-md-3 col-lg-3 location loc-3">
-            Phòng ngủ 2
+        <div class="col-sm-12 col-md-6 col-lg-3 location loc-3">
+            <div class="location-content ">Phòng ngủ 2</div>
         </div>
-        <div class="col-sm-12 col-md-3 col-lg-3 location loc-4">
-            Phòng tắm
+        <div class="col-sm-12 col-md-6 col-lg-3 location loc-4">
+            <div class="location-content "> Phòng tắm</div>
         </div>
-        <div class="col-sm-12 col-md-3 col-lg-3 location loc-5">
-            Các đèn khác
+        <div class="col-sm-12 col-md-6 col-lg-3 location ">
+            <div class="location-content "> Phòng tắm</div>
         </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 location loc-diff">
+            <div class="location-content "> Phòng tắm</div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 location loc-diff">
+            <div class="location-content "> Phòng tắm</div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 location loc-diff">
+            <div class="location-content "> Phòng tắm</div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3 location loc-diff">
+            <div class="location-content "> Phòng tắm</div>
+        </div>
+        {{--        <div class="col-sm-12 col-md-6 col-lg-3 location-content loc-5">--}}
+        {{--            Các đèn khác--}}
+        {{--        </div>--}}
     </div>
 </div>
 
