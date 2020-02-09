@@ -19,6 +19,14 @@
 
 <div class="container">
     <div class="row">
+        <div class="col- col-sm-12 col-md-12 col-lg-12 menu">
+            <a class="active" href="#home">Home</a>
+            <a href="#news">News</a>
+            <a href="#contact">Contact</a>
+            <a href="#about">About</a>
+        </div>
+    </div>
+    <div class="row">
         <div class="col- col-sm-12 col-md-12 col-lg-12 header">
             <h2 class="text-center">Welcomee to Smart Home</h2>
             <p>Nơi đỡ cực nhất</p>
@@ -38,7 +46,7 @@
             <div class="location-content "> Phòng tắm</div>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-3 location ">
-            <div class="location-content "> Phòng tắm</div>
+            <div class="location-content "> Phòng different</div>
         </div>
         <div class="col-sm-12 col-md-6 col-lg-3 location loc-diff">
             <div class="location-content "> Phòng tắm</div>
