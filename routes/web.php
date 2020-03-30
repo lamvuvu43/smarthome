@@ -19,6 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Auth::routes();
+Route::get('/show_room_of_home/{id}','ShowRoomController@index')->name('show_room_of_home');
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/control_device_room/{keyroom}/{keyled}','ControlDevice@control_led');
+

@@ -24,10 +24,15 @@
 .header {
     width: 100%;
     height: 300px;
-    background: linear-gradient(to right, #6cb2eb, #9561e2);
     margin-bottom: 2px;
+    background-image: url("../image_backgound/header.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
-
+.header h2{
+    color:#FF0033;
+}
 .location {
     height: 200px;
     width: 100%;
@@ -64,7 +69,13 @@
     background-position: center;
     background-size: cover;
 }
-
+.loc-diff{
+    background-image: url("../image_backgound/santhuong.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+}
 .location-content {
     position: absolute;
     margin-right: -50%;
@@ -76,9 +87,13 @@
     font-size: 30px;
     /*font-weight: bold;*/
     font-family: Algerian;
-    color: white;
+    color: rgb(15,171,166);
 }
-
-.loc-1 .loc-2 .col-3 {
-
+.led{
+    border: #5cd08d 5px solid;
+    padding-top: 9px;
+    padding-bottom: 0px;
+}
+.button-led{
+    text-align: right;
 }
