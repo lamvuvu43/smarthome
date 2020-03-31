@@ -16,6 +16,9 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/login','Auth\LoginController@showformlogin');
+Route::POST('/login_process','Auth\LoginController@login')->name('login_process');
+Route::POST('/register/','Auth\RegisterController@create')->name('register');
 
 Route::get('/home', 'HomeController@index')->name('home');
 

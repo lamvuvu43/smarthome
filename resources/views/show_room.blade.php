@@ -1,5 +1,6 @@
 @extends('welcome')
 @section('show_room')
+
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-3 location loc-1 ">
             <div class="location-content ">Phòng khách</div>

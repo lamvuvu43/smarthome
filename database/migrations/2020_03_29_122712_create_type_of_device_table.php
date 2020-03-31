@@ -15,7 +15,7 @@ class CreateTypeOfDeviceTable extends Migration
     {
         Schema::create('type_of_device', function (Blueprint $table) {
             $table->Increments('id_type');
-            $table->string(' name_type','30');
+            $table->string('name_type','30');
             $table->timestamps();
         });
     }

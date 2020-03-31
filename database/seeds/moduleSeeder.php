@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class detail_of_deviceSeeder extends Seeder
+class moduleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class detail_of_deviceSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('detail_of_device')->insert(['serial'=>'1234567890DH','id_dev'=>'1','name'=>'led']);
+        DB::table('module')->insert(['serial'=>'1234567890DH','name_mod'=>'noname_mod','value'=>'1']);
     }
 }

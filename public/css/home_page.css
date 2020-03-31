@@ -21,6 +21,12 @@
     background-color: #4CAF50;
     color: white;
 }
+
+.menu_login a {
+    float: right;
+    /*background-color:white;*/
+}
+
 .header {
     width: 100%;
     height: 300px;
@@ -30,9 +36,11 @@
     background-position: center;
     background-size: cover;
 }
-.header h2{
-    color:#FF0033;
+
+.header h2 {
+    color: #FF0033;
 }
+
 .location {
     height: 200px;
     width: 100%;
@@ -69,13 +77,15 @@
     background-position: center;
     background-size: cover;
 }
-.loc-diff{
+
+.loc-diff {
     background-image: url("../image_backgound/santhuong.jpg");
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
     text-align: center;
 }
+
 .location-content {
     position: absolute;
     margin-right: -50%;
@@ -87,13 +97,102 @@
     font-size: 30px;
     /*font-weight: bold;*/
     font-family: Algerian;
-    color: rgb(15,171,166);
+    color: rgb(15, 171, 166);
 }
-.led{
+
+.led {
     border: #5cd08d 5px solid;
     padding-top: 9px;
     padding-bottom: 0px;
 }
-.button-led{
+
+.button-led {
     text-align: right;
+}
+
+.email_login input {
+    width: 90%;
+    height: 35px;
+    border: 1px solid;
+    box-shadow: 5px 5px #888888;
+}
+
+.pass_login input {
+    width: 90%;
+    height: 35px;
+    border: 1px solid;
+    box-shadow: 5px 5px #888888;
+}
+
+.title_register {
+    background-color: #5cd08d;
+    margin-bottom: 10px;
+}
+
+.title_login {
+    background-color: #5cd08d;
+    margin-bottom: 10px;
+}
+
+.username_register input {
+    width: 90%;
+    height: 35px;
+    border: 1px solid;
+    box-shadow: 5px 5px #888888;
+}
+
+.phone_register input {
+    width: 90%;
+    height: 35px;
+    border: 1px solid;
+    box-shadow: 5px 5px #888888;
+}
+
+.address_register input {
+    width: 90%;
+    height: 35px;
+    border: 1px solid;
+    box-shadow: 5px 5px #888888;
+}
+
+.pass_register .email_register input {
+    width: 90%;
+    height: 35px;
+    border: 1px solid;
+    box-shadow: 5px 5px #888888;
+}
+
+.email_register input {
+    width: 90%;
+    height: 35px;
+    border: 1px solid;
+    box-shadow: 5px 5px #888888;
+}
+
+.pass_register input {
+    width: 90%;
+    height: 35px;
+    border: 1px solid;
+    box-shadow: 5px 5px #888888;
+}
+.modal-footer{
+    display:block;
+}
+.form_login{
+    transform: translate(0px,30px);
+    width: 300px;
+    margin: 0 auto;
+    z-index: 1000;
+    border: #5cd08d 2px solid;
+}
+/*------------------mobile -----------------------*/
+@media only screen and (max-width: 765px) {
+    .modal-dialog {
+        position: relative;
+        width: auto;
+        margin: 0 auto;
+        pointer-events: none;
+        line-height: 40%;
+        padding-top: 40%;
+    }
 }
