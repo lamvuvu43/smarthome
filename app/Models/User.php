@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
-    protected $table= 'users';
-    protected $primaryKey='id';
+    protected $table = 'users';
+    protected $primaryKey = 'id';
     protected $fillable = [
-        'username', 'password', 'phone','email','address','role_id'
+        'first_name', 'last_name', 'email', 'phone', 'role_id', 'address', 'password'
     ];
 }

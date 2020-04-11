@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeOfDeviceTable extends Migration
+class CreateDeviceTypeTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateTypeOfDeviceTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_of_device', function (Blueprint $table) {
-            $table->Increments('id_type');
-            $table->string('name_type','30');
-            $table->timestamps();
+        Schema::create('device_type', function (Blueprint $table) {
+            $table->Increments('id');
+            $table->string('name_devi_type','30');
+//            $table->timestamps();
         });
     }
 

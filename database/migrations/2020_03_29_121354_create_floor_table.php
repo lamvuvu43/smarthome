@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateGroup2Table extends Migration
+class CreateFloorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateGroup2Table extends Migration
      */
     public function up()
     {
-        Schema::create('group2', function (Blueprint $table) {
-            $table->increments('id_gr2');
-            $table->integer('id_gr1')->unsigned();
-            $table->string('name_gr2');
-            $table->foreign('id_gr1')->references('id_gr1')->on('group1')->onDelete('cascade');
-            $table->timestamps();
+        Schema::create('floor', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('id_house')->unsigned();
+            $table->string('name_floor');
+            $table->foreign('id_house')->references('id')->on('house')->onDelete('cascade');
+//            $table->timestamps();
         });
     }
 

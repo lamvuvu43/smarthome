@@ -17,8 +17,8 @@ class CreateHisLogTable extends Migration
             $table->integer('id_user')->unsigned();
             $table->dateTime('log_time');
             $table->string('device','20');
-            $table->foreign('id_user')->references('id_user')->on('users')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreign('id_user')->references('id')->on('users')->onDelete('cascade');
+//            $table->timestamps();
         });
     }
 

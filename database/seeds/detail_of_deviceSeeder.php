@@ -11,6 +11,6 @@ class detail_of_deviceSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('detail_of_device')->insert(['serial'=>'1234567890DH','id_dev'=>'1','name'=>'led']);
+        DB::table('detail_of_device')->insert(['mac'=>'1234567890DH','id_dev'=>'1','id_stt'=>'1','name_house'=>'led']);
     }
 }

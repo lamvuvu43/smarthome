@@ -14,11 +14,15 @@ class CreateModuleTable extends Migration
     public function up()
     {
         Schema::create('module', function (Blueprint $table) {
-            $table->Increments('id_mod');
-            $table->string('serial','12');
+            $table->Increments('id');
+            $table->integer('id_stt')->unsigned();
+            $table->integer('id_mod_type')->unsigned();
+            $table->string('mac','12');
             $table->string('name_mod','10');
             $table->integer('value');
-            $table->timestamps();
+            $table->foreign('id_stt')->references('id')->on('status')->onDelete('cascade');
+            $table->foreign('id_mod_type')->references('id')->on('module_type')->onDelete('cascade');
+//            $table->timestamps();
         });
     }
 

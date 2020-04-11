@@ -14,11 +14,13 @@ class CreateDetailOfDeviceTable extends Migration
     public function up()
     {
         Schema::create('detail_of_device', function (Blueprint $table) {
-            $table->string('serial','12');
+            $table->string('mac','12');
             $table->integer('id_dev')->unsigned();
-            $table->string('name','30');
-            $table->foreign('id_dev')->references('id_dev')->on('device')->onDelete('cascade');
-            $table->timestamps();
+            $table->integer('id_stt')->unsigned();
+            $table->string('name_house','30');
+            $table->foreign('id_dev')->references('id')->on('device')->onDelete('cascade');
+            $table->foreign('id_stt')->references('id')->on('status')->onDelete('cascade');
+//            $table->timestamps();
         });
     }
 

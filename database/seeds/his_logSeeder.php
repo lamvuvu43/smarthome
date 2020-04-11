@@ -11,8 +11,8 @@ class his_logSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('his_log')->insert(['id_user'=>'1','log_time' => date('Y-m-d H:i:s'), 'device' => 'led long'],
+        DB::table('his_log')->insert([['id_user'=>'1','log_time' => date('Y-m-d H:i:s'), 'device' => 'led long'],
             ['id_user'=>'2','log_time' => date('Y-m-d H:i:s'), 'device' => 'led color'],
-            ['id_user'=>'3','log_time' => date('Y-m-d H:i:s'), 'device' => 'led ball']);
+            ['id_user'=>'3','log_time' => date('Y-m-d H:i:s'), 'device' => 'led ball']]);
     }
 }

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\HisLog;
+use App\Models\House;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\MessageBag;
-
 class LoginController extends Controller
 {
     /*
@@ -42,10 +43,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
     public  function  showformlogin(){
-        return view('auth.login');
+        return view('welcome');
     }
     public function login(Request $request)
     {
+//        dd($request->all());
         $rules = [
             'email' =>'required',
             'password'=>'required'
@@ -58,6 +60,7 @@ class LoginController extends Controller
 
 //        dd(Auth::attempt(['email' => $request['email'], 'password' =>$request['password']]));
 //        dd($validator);
+//        --------------------------------------------------------
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         } else {
@@ -65,9 +68,10 @@ class LoginController extends Controller
             $password = $request->input('password');
 
             if( Auth::attempt(['email' => $email, 'password' =>$password])) {
-                if(Auth::id()==1){
-                    dd('đã đên đây');
-                    return redirect()->route('show_room_of_home');
+               HisLog::insert(['id_user'=>Auth::id(),'log_time'=>date("Y/m/d h:i:s"),'device'=>$request->input('mac')]);
+                if(Auth::check()==true){
+//                    dd('đã đên đây');
+                    return redirect()->route('list_home');
                 }else{
                     dd('đã đên đây rùi');
                     return redirect()->back();
@@ -78,6 +82,10 @@ class LoginController extends Controller
 //                return redirect()->back()->withInput()->withErrors($errors);
             }
         }
+    }
+    public function logout(){
+        Auth::logout();
+        return view('welcome');
     }
 
 }

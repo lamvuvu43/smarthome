@@ -11,7 +11,7 @@ class user_permissionSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('user_permission')->insert(['name_per'=>'admin','des_per'=>'quản trị viên'],
-            ['name_per'=>'customer','des_per'=>'khách hàng']);
+        DB::table('user_permission')->insert([['name_per'=>'admin','des_per'=>'quản trị viên'],
+            ['name_per'=>'customer','des_per'=>'khách hàng']]);
     }
 }

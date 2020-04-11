@@ -14,13 +14,11 @@ class CreateDeviceTable extends Migration
     public function up()
     {
         Schema::create('device', function (Blueprint $table) {
-            $table->increments('id_dev');
-            $table->integer('id_type')->unsigned();
+            $table->increments('id');
+            $table->integer('id_devi_type')->unsigned();
             $table->string('name_device','20');
-            $table->integer('start_value');
-            $table->integer('limit_value');
-            $table->foreign('id_type')->references('id_type')->on('type_of_device')->onDelete('cascade');
-            $table->timestamps();
+            $table->foreign('id_devi_type')->references('id')->on('device_type')->onDelete('cascade');
+//            $table->timestamps();
         });
     }
 

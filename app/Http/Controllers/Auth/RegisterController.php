@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 //use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 
@@ -82,15 +83,18 @@ class RegisterController extends Controller
      */
     public function create(Request $request)
     {
+        dd($request->all());
         $rules = [
-            'username_register' => 'required|max:30', //unique:tenbang,tencot
+            'firtname_register' => 'required|max:30', //unique:tenbang,tencot
+            'lastname_register' => 'required|max:30', //unique:tenbang,tencot
             'email_register' => 'required|unique:users,email|max:60',
             'phone_register' => 'required|unique:users,phone|max:12',
             'address_register' => 'required|max:60',
             'pass_register' => 'required|min:8',
         ];
         $messages = [
-            'username_register.required' => 'Họ tên không được trống',
+            'firstname_register.required' => 'Tên không được trống',
+            'lastname_register.required' => 'Họ không được trống',
             'email.unique' => 'Email đã tồn tại',
             'username_register.max' => 'Độ dài tối đa là 255',
             'email_register.required' => 'Email không được rỗng',
@@ -114,7 +118,8 @@ class RegisterController extends Controller
                 'email' => $request['email_register'],
                 'address' => $request['address_register']
             ]);
-            return view('show_room');
+            Auth::attempt(['email' =>  $request['email_register'], 'password' =>$request['pass_register']]);
+            return redirect()->back()->with('register_successful','Bạn đã đăng kí thành công');
         }
 
     }

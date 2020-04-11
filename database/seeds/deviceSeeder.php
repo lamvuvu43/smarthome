@@ -11,8 +11,8 @@ class deviceSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('device')->insert(['id_type'=>'1','name_device'=>'đèn dài','start_value'=>'1','limit_value'=>'10'],
-            ['id_type'=>'1','name_device'=>'đèn tròn','start_value'=>'1','limit_value'=>'10']
-            );
+        DB::table('device')->insert([['id_devi_type' => '1', 'name_device' => 'đèn dài'],
+                ['id_dive_type' => '1', 'name_device' => 'đèn tròn']]
+        );
     }
 }
