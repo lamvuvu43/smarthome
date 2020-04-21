@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 class Floor extends Model
 {
     protected $table='floor';
-    protected $primaryKey='id';
+    protected $primaryKey='id_floor';
     protected $fillable=['id_house','name_floor'];
     public function room(){
         return $this->hasMany('App\Models\Room','id_floor');

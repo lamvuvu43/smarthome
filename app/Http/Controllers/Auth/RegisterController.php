@@ -51,6 +51,7 @@ class RegisterController extends Controller
      */
     protected function validator(Request $request)
     {
+//        dd($request->all());
         $rules = [
             'username_register' => 'required|max:30', //unique:tenbang,tencot
             'email_register' => 'required|unique:users,email|max:60',
@@ -83,18 +84,15 @@ class RegisterController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request->all());
+//        dd($request->all());
         $rules = [
-            'firtname_register' => 'required|max:30', //unique:tenbang,tencot
-            'lastname_register' => 'required|max:30', //unique:tenbang,tencot
+            'username_register' => 'required|max:30', //unique:tenbang,tencot
             'email_register' => 'required|unique:users,email|max:60',
-            'phone_register' => 'required|unique:users,phone|max:12',
+            'phone_register' => 'required|unique:users,phone|max:10',
             'address_register' => 'required|max:60',
             'pass_register' => 'required|min:8',
         ];
         $messages = [
-            'firstname_register.required' => 'Tên không được trống',
-            'lastname_register.required' => 'Họ không được trống',
             'email.unique' => 'Email đã tồn tại',
             'username_register.max' => 'Độ dài tối đa là 255',
             'email_register.required' => 'Email không được rỗng',
@@ -111,15 +109,15 @@ class RegisterController extends Controller
             return redirect()->back()->withErrors($validator);
         } else {
 //            dd($request->all());
-            User::create([
-                'username' => $request['username_register'],
+            User::insert([
+                'email' => $request['email_register'],
                 'password' => bcrypt($request['pass_register']),
                 'phone' => $request['phone_register'],
-                'email' => $request['email_register'],
+                'full_name' => $request['username_register'],
                 'address' => $request['address_register']
             ]);
-            Auth::attempt(['email' =>  $request['email_register'], 'password' =>$request['pass_register']]);
-            return redirect()->back()->with('register_successful','Bạn đã đăng kí thành công');
+//            Auth::attempt(['email' => $request->input('email_register'), 'password' => $request->input('pass_register')]);
+            return redirect()->back()->with('register_successful', 'Bạn đã đăng kí thành công');
         }
 
     }

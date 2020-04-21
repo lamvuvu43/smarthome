@@ -82,7 +82,7 @@ class ControlDevice extends Controller
         //
     }
 
-    public function control_led($keyroom, $keyled)
+    public function control_led()
     {
         //nhớ check Auth nhé.
         return view('control-device');

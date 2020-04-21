@@ -12,50 +12,8 @@
                 <div class="text-center pb-4 pt-3 title_edit_device">
                     <h4 class="modal-title">Chỉnh sửa thiết bị</h4>
                 </div>
-                <div class="table_device">
-                    <table class="table text-center table-striped">
-                        <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Tên controller</th>
-                            <th>Tên Module</th>
-                            <th scope="col">Thiết bị</th>
-                            <th scope="col">Vị trí thiết bị</th>
-                            <th scope="col">Người sở hữu</th>
-
-                            <th>Thao tác</th>
-                        </tr>
-                        </thead>
-
-                        @foreach($controller as $item)
-                            <tr>
-                                @if($item->name_controller != null)
-                                    <td>{{$item->name_controller}}</td>
-                                @else
-                                    <td>Không có thông tin</td>
-                                @endif
-                                @if($item->module != null)
-                                    <td>{{$item->module->name_mod}}</td>
-                                    <td>{{$item->module->mac}}</td>
-                                @else
-                                    <td>Không có thông tin</td>
-                                    <td>Không có thông tin</td>
-                                @endif
-                                @if($item->room!= null)
-                                    <td class="text-left">{{$item->room->name_room}}
-                                        - {{$item->room->floor->name_floor}}
-                                        - {{$item->room->floor->house->name_house}}</td>
-                                @else
-                                    <td class="text-left">Không có thông tin</td>
-                                @endif
-                                <td>{{$item->user->last_name}} {{$item->user->first_name}}</td>
-
-                                <td>
-                                    <button><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    <button><i class="fa fa-pencil-square" aria-hidden="true"></i></button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </table>
+                <div class="form_edit_device">
+                    <
                 </div>
             </div>
         </div>

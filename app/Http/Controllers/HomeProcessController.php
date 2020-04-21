@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Floor;
 use App\Models\House;
+use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class HomeProcessController extends Controller
@@ -26,15 +29,18 @@ class HomeProcessController extends Controller
      */
     public function create(Request $request)
     {
-        dd($request->all());
-        $rules = [
-            'house' => 'required',
+//        dd($request->All());
+//        dd($request['floor'][0]);
+        $id_hosue = House::insertGetId(['id_user' => Auth::id(), 'name_house' => $request['house']]);
+        if ($request['floor'][0] == null) {
+            Floor::insert(['id_house' => 1, 'name_floor' => 'Tầng trệt']);
+        } else {
+            for ($i = 0; $i < count($request['floor']); $i++) {
+                Floor::insert(['id_house' => $id_hosue, 'name_floor' => $request['floor'][$i]]);
+            }
+        }
+        return redirect()->route('show_form_room');
 
-        ];
-        $messages = [
-            'house.required' => 'Email là trường bắt buộc',
-        ];
-        $validator = Validator::make($request->all(), $rules, $messages);
     }
 
     /**
@@ -94,5 +100,39 @@ class HomeProcessController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function get_floor($id_house)
+    {
+        $get_floor = Floor::where('id_house', $id_house)->get();
+        foreach ($get_floor as $item) {
+            echo "<option value='$item->id_floor '> $item->name_floor  </option>";
+        }
+
+
+    }
+
+    public function show_form_room()
+    {
+        $get_house = House::where('id_user', Auth::id())->get();
+        return view('form_add_room', compact('get_house'));
+    }
+
+    public function create_room(Request $request)
+    {
+        for($i=0;$i<count($request['name_room']);$i++){
+            Room::insert(['id_floor'=>$request['id_floor'],'name_room'=>$request['name_room'][$i]]);
+        }
+        return redirect()->back()->with('success','Đã thêm phòng thàng công');
+    }
+    public function get_room($id_floor){
+        $get_room = Room::where('id_floor',$id_floor)->get();
+        echo "  <tr><th colspan=\"2\">Các phòng đã có </th></tr>
+                        <tr><th>STT</th> <th>Tên Phòng</th></tr>";
+        foreach ($get_room as $i => $item){
+            $i++;
+
+            echo "<tr><td>$i</td><td>$item->name_room</td></tr>";
+        }
     }
 }

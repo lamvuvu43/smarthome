@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\HisLog;
+use App\Models\LoginHistory;
 use App\Models\House;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -68,12 +68,13 @@ class LoginController extends Controller
             $password = $request->input('password');
 
             if( Auth::attempt(['email' => $email, 'password' =>$password])) {
-               HisLog::insert(['id_user'=>Auth::id(),'log_time'=>date("Y/m/d h:i:s"),'device'=>$request->input('mac')]);
+//                dd(Auth::id());
+               LoginHistory::insert(['id_user'=>Auth::id(),'log_time'=>date("Y/m/d h:i:s"),'device_login'=>$request->input('mac')]);
                 if(Auth::check()==true){
 //                    dd('đã đên đây');
                     return redirect()->route('list_home');
                 }else{
-                    dd('đã đên đây rùi');
+//                    dd('đã đên đây rùi');
                     return redirect()->back();
                 }
             } else {

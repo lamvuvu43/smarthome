@@ -9,7 +9,7 @@
         <div class="row">
             @foreach($house as $i => $item)
                 <div class="col-sm-12 col-md-6 col-lg-3 location loc-1 ">
-                    <div class="get_link" style="display: none">{{route('list_floor',$item->id)}}</div>
+                    <div class="get_link" style="display: none">{{route('list_floor',$item->id_house)}}</div>
                     <div class="location-content pb-3 ">{{$item->name_house}}</div>
                     <ul class="list_floor">
                         @foreach($item->floor as $item_floor)

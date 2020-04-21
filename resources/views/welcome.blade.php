@@ -65,7 +65,7 @@
     @endif
     @if (Session::get('register_successful'))
         <div class="alert alert-success">
-            <button type="button" class="close" data-dismiss="alert">x</button>
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
             {{ Session::get('register_successful') }}
         </div>
     @endif
@@ -85,16 +85,17 @@
             @endif()
             <a id="button_show_menu"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <div class="div_button_add">
-                <a class="button_add">Thêm nhà </a>
+                <a class="button_add" href="{{route('add_home')}}">Thêm nhà </a>
+                <a class="button_add" href="{{route('show_form_room')}}">Thêm phòng </a>
                 <a class="button_add" href="{{route('add_device.show')}}">Thêm thiết bị</a>
-                <a class="button_add" href="{{route('edit_device.show')}}">Chỉnh sửa thiết bị</a>
+                <a class="button_add" href="{{route('list_device.show')}}">Danh sách thiết bị</a>
             </div>
         </div>
         <div class="col- col-sm-6 col-md-6 col-lg-6 menu menu_login">
             <a href="#contact">Hỗ trợ</a>
             @if(Auth::check()==true)
                 <a style="text-transform: uppercase;"
-                   id="show_button_logout">{{Auth::user()->last_name}} {{Auth::user()->first_name}}</a>
+                   id="show_button_logout">{{Auth::user()->last_name}} {{Auth::user()->full_name}}</a>
             @else
                 <a href="#news" data-toggle="modal" data-target="#registerModal" id="button_register">Đăng kí</a>
                 <a data-toggle="modal" data-target="#loginModal" href="#home" id="show_modal_login">Đăng nhập</a>
@@ -153,7 +154,7 @@
         </div>
     </div>
     <div id="registerModal" class="modal fade" role="dialog">
-        <div class="modal-dialog" style="width:300px;height: 300px ">
+        <div class="modal-dialog" style="width:400px;height: 300px ">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="text-center pb-4 pt-3 title_register">
@@ -181,13 +182,9 @@
                                    oninvalid="this.setCustomValidity('Vui lòng nhập mật khẩu')"
                                    oninput="setCustomValidity('')">
                         </div>
-                        <div class="firstname_register pb-3">
-                            <label class="lable_register" for="firstname_register">Tên</label>
-                            <input type="text" placeholder="Tên" name="firstname_register" id="firstname_register">
-                        </div>
-                        <div class="lastname_register pb-3">
-                            <label class="lable_register" for="lastname_register">Họ</label>
-                            <input type="text" placeholder="Tên" name="lastname_register" id="lastname_register">
+                        <div class="username_register pb-3">
+                            <label class="lable_register" for="username_register">Họ và tên</label>
+                            <input type="text" placeholder="Họ và tên" name="username_register" id="username_register" value="">
                         </div>
                         <div class="phone_register pb-3">
                             <label class="lable_register" for="phone_register">Số điện thoại</label>
@@ -215,9 +212,11 @@
     @yield('control_led')
     @yield('show_room')
     @yield('form_add_home')
+    @yield('form_add_room')
     @yield('list_home')
     @yield('list_floor')
     @yield('add_device')
+    @yield('list_device')
     @yield('edit_device')
 </div>
 <script>

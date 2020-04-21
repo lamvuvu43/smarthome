@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DetailOfProduct;
 use App\Models\Floor;
 
-use App\Models\Module;
+use App\Models\Device;
 
 use App\Models\Room;
 use App\Models\ModelController;
@@ -31,7 +32,8 @@ class AddDeviceController extends Controller
     public function create()
     {
         $controller = ModelController::where('id_user', Auth::id())->get();
-        return view('edit_device', compact('controller'));
+//        dd($controller);
+        return view('list_device', compact('controller'));
     }
 
     /**
@@ -42,15 +44,15 @@ class AddDeviceController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request->all());
-        //thực hiện truy vấn bảng module để lấy id module lưu vào controller thông qua mac khách nhập
-        $id_mod = Module::where('mac', '=', $request->mac)->get();
-//        dd(count($id_mod));
-//        ModelController::insert(['id_mod' => $id_mod->id, 'id_room' => $request->select_room, 'id_user' => Auth::id(), 'id_per' => $request->permission, 'name_con' => $request->name_controller]);
+//        dd($request['mac']);
+        $id_mod = Device::where('mac', '=', $request['mac'])->get();
+        DetailOfProduct::where('mac',$request['mac'])->update(['id_stt'=>'2']);
         if (count($id_mod) != 0) {
-            foreach ($id_mod as $item) {
-                ModelController::insert(['id_mod' => $item->id, 'id_user' => Auth::id(), 'id_per' => 3]);
+            foreach ($id_mod as $item){
+//                dd($item->id_devi);
+                ModelController::insert(['id_devi' =>$item->id_devi, 'id_user' => Auth::id()]);
             }
+            DetailOfProduct::where('mac',$request['mac'])->update(['id_stt'=>'2']);
             return redirect()->back()->with('add_success', 'Bạn đang thêm thành công thiết bị');
         } else {
             return redirect()->back()->with('error_mac', 'Thiết bị bạn nhập không tồn
@@ -67,7 +69,8 @@ class AddDeviceController extends Controller
      */
     public function show($id)
     {
-        //
+        $get_controller=ModelController::where('id_con',$id)->get();
+        return view('edit_device');
     }
 
     /**

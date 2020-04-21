@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class DetailOfDevice extends Model
+class DetailOfProduct extends Model
 {
-    protected $table='detail_of_device';
+    protected $table='detail_of_product';
     protected $fillable=['mac','id_dev','id_stt','name_house'];
     public function device(){
         return $this->belongsTo('App\Models\Device','id_dev');

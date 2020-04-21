@@ -165,7 +165,7 @@ body {
     font-size: 30px;
 }
 
-.firstname_register input {
+.username_register input {
     width: 90%;
     height: 35px;
     border: 1px solid;
@@ -330,13 +330,19 @@ body {
 }
 
 .form_add_home {
-    width: 350px;
+    width: 400px;
     margin: 0 auto;
     height: auto;
     border: 1px solid;
     background-color: lightskyblue;
 }
-
+.form_add_room {
+    width: 400px;
+    margin: 0 auto;
+    height: auto;
+    border: 1px solid;
+    background-color: lightskyblue;
+}
 .title_form_add_home {
     height: 60px;
     width: 100%;
@@ -354,10 +360,16 @@ body {
     margin-bottom: 5px;
     font-size: 18px;
 }
-
+.name_floor{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border: 2px solid whitesmoke;
+    background-color: #5CD08D;
+}
 .name_floor label {
     margin-bottom: 5px;
     font-size: 18px;
+
 }
 
 .name_room label {
@@ -366,12 +378,18 @@ body {
 }
 
 .sup_floor_room {
-    background-color: #9561e2;
+    /*background-color: lightcyan;*/
     padding-top: 5px;
     padding-bottom: 5px;
     border-bottom: solid;
 }
 
+.add_room {
+    background-color: lightcyan;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    border-bottom: solid;
+}
 .title_status {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -467,4 +485,18 @@ body {
     margin-left: 5%;
     border: 1px solid;
     box-shadow: 5px 5px #888888;
+}
+#table_room{
+    display: none;
+    margin-top: 10px;
+    width: 100%;
+    border:solid 1px black;
+    color: black;
+    text-align: center;
+    background-color: white;
+}
+#table_room th,td{
+    border:solid 1px black;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }

@@ -8,7 +8,7 @@
     <div class="row">
         @foreach($floor as $item)
             <div class="col-sm-12 col-md-6 col-lg-3 location loc-1 ">
-                <div class="get_link" style="display: none">{{route('list_room',$item->id)}}</div>
+                <div class="get_link" style="display: none">{{route('list_room',$item->id_floor)}}</div>
                 <div class="location-content pb-3 ">{{$item->name_floor}}</div>
                 <ul class="list_floor">
                         <li class="pt-2 pb-1">
