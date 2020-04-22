@@ -12,4 +12,5 @@ class House extends Model
     public function floor(){
         return $this->hasMany('App\Models\Floor','id_house');
     }
+    public $timestamps = false;
 }

@@ -11,4 +11,5 @@ class Device extends Model
     protected $table='device';
     protected $primaryKey='id_devi';
     protected $fillable=['id_stt','mac','id_devi_type','devi_value'];
+    public $timestamps = false;
 }

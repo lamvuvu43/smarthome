@@ -9,7 +9,7 @@ class ModelController extends Model
     protected $table = 'controller';
     protected $primaryKey = 'id_con';
     protected $fillable = [ 'id_user','id_per','id_devi', 'id_room','name_con'];
-
+    public $timestamps = false;
     public function room()
     {
         return $this->belongsTo('App\Models\Room', 'id_room');

@@ -14,5 +14,6 @@ class DetailOfProduct extends Model
     public function status(){
         return $this->belongsTo('App\Models\Status','id_stt');
     }
+    public $timestamps = false;
 
 }

@@ -46,11 +46,11 @@ class AddDeviceController extends Controller
     {
 //        dd($request['mac']);
         $id_mod = Device::where('mac', '=', $request['mac'])->get();
-        DetailOfProduct::where('mac',$request['mac'])->update(['id_stt'=>'2']);
+//        DetailOfProduct::where('mac',$request['mac'])->update(['id_stt'=>'2']);
         if (count($id_mod) != 0) {
             foreach ($id_mod as $item){
 //                dd($item->id_devi);
-                ModelController::insert(['id_devi' =>$item->id_devi, 'id_user' => Auth::id()]);
+                ModelController::insert(['id_devi' =>$item->id_devi, 'id_user' => Auth::id(),'id_per'=>'3']);
             }
             DetailOfProduct::where('mac',$request['mac'])->update(['id_stt'=>'2']);
             return redirect()->back()->with('add_success', 'Bạn đang thêm thành công thiết bị');

@@ -14,4 +14,5 @@ class Floor extends Model
     public function house(){
         return $this->belongsTo('App\Models\House','id_house');
     }
+    public $timestamps = false;
 }
