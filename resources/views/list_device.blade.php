@@ -1,59 +1,92 @@
 @extends('welcome')
 @section('list_device')
     <div class="row">
-        @if (session('add_success'))
-            <div class="alert alert-success">
-                <button type="button" class="close" data-dismiss="alert">x</button>
-                {{ session('add_success') }}
-            </div>
-        @endif
+
         <div class="col-12 col-md-12 col-lg-12 ">
-            <div class="edit_device">
+            @if (session('add_success'))
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">x</button>
+                    {{ session('add_success') }}
+                </div>
+            @endif
+            <div class="list_device">
                 <div class="text-center pb-4 pt-3 title_edit_device">
                     <h4 class="modal-title">Danh sách thiết bị</h4>
                 </div>
-                <div class="table_device">
-                    <table class="table text-center table-striped">
+                <div class="table_device col-12 col-md-12 col-lg-12">
+                    <table class="table text-center table-striped ">
                         <thead class="thead-dark">
                         <tr>
-                            <th scope="col">ID controller</th>
+                            <th style="display: none">ID controller</th>
                             <th>ID Thiết bị</th>
                             <th scope="col">Name</th>
                             <th scope="col">Vị trí thiết bị</th>
-                            <th scope="col">Người đ</th>
+                            <th scope="col">Tên người dùng</th>
                             <th>Quyền</th>
-                            <th>Thao tác</th>
+                            <th>Chức năng</th>
+                            <th>Chia sẻ</th>
                         </tr>
                         </thead>
 
                         @foreach($controller as $item)
                             <tr>
-                                @if($item->id_con != null)
-                                    <td>{{$item->id_con}}</td>
-                                @else
-                                    <td>Không có thông tin</td>
-                                @endif
 
-                                <td>{{$item->id_devi}}</td>
+                                <td style="display: none">{{$item->id_con}}</td>
+
+                                <td class="id_device">{{$item->id_devi}}</td>
                                 <td>{{$item->name_con}}</td>
 
                                 @if($item->room != null)
-                                    <td class="text-left">{{$item->room->name_room}}
-                                        - {{$item->room->floor->name_floor}}
-                                        - {{$item->room->floor->house->name_house}}</td>
+                                    <td class="text-left">Phòng: {{$item->room->name_room}}
+                                        - Tầng: {{$item->room->floor->name_floor}}
+                                        - Nhà:{{$item->room->floor->house->name_house}}</td>
                                 @else
                                     <td class="text-left">Không có thông tin</td>
                                 @endif
                                 <td>{{$item->user->full_name}} </td>
                                 <td>{{$item->permission->des_per}}</td>
                                 <td>
-                                    <button><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    <button class="btn_remove_con" data-toggle="modal" data-target="#delete-controller"
+                                            data><i class="fa fa-trash" aria-hidden="true"></i></button>
                                     <a href="{{route('edit_device.show',$item->id_con)}}"><i
                                             class="btn btn-primary fa fa-pencil-square" aria-hidden="true"></i></a>
+                                </td>
+                                <td>
+                                    <button class="btn btn-link"><i class="fa fa-share-alt" aria-hidden="true"></i> </button>
                                 </td>
                             </tr>
                         @endforeach
                     </table>
+                </div>
+            </div>
+        </div>
+        <div class="modal" id="delete-controller" style="font: normal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+
+                    <!-- Modal Header -->
+                    <div class="modal-header">
+                        <h4 class="modal-title">Xoá thiết bị</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+
+                    <!-- Modal body -->
+                    <div class="modal-body delete-restaurant text-center">
+                        <h2>Bạn có thực sử muốn xoá thiết bị <br> <span style="color: red;" id="name_device"> name device </span>
+                        </h2>
+                        <span id="address_devi" style="color: #1d68a7">Vị trí thiết bị</span> <br>
+                        <span>khỏi hệ thống</span> <br>
+                        <p style="display: none" id="id_con"></p>
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer text-right">
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">Huỷ</button>
+                        <button type="button" class="btn btn-success btn-delete-controller" data-dismiss="modal">Đồng
+                            ý
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
@@ -89,5 +122,45 @@
         $('#mac').keyup(function () {
             $(this).val($(this).val().toUpperCase());
         })
+        // -------------------xoá controller------------------------
+        $('.btn_remove_con').click(function () {
+            var $id_con = $(this).parent().parent().find('td').html();
+            var $name_device = $(this).parent().parent().find('td').next().next().html();
+            var $address_device = $(this).parent().parent().find('td').next().next().next().html();
+            $('#name_device').html($name_device);
+            $('#address_devi').html($address_device);
+            $('#id_con').html($id_con);
+            // console.log($address_device);
+        });
+
+        $('.btn-delete-controller').click(function () {
+            var $id_con = $('#id_con').html();
+            var token = $("meta[name='csrf-token']").attr("content");
+            $.ajax({
+                url: "../home/delete_con/" + $id_con,
+                type: 'DELETE',
+                data: {
+                    "id": $id_con,
+                    "_token": token,
+                },
+                success: function (data) {
+                    console.log(data);
+                    window.location.reload();
+                },
+            });
+            // $("#" + id).parent().hide(400);
+        })
+        // ----------------------------------------------
+        window.onload = function () {
+            var $amountClass = $('.id_device').length;
+
+            for ($i = 0; $i < $amountClass; $i++) {
+                $id_devi = $('.id_device:eq(' + $i + ')').html();
+                $.get('../home/add_amount/' + $id_devi, function (data) {
+                    array_amount.push(data);
+                });
+            }
+
+        }
     </script>
 @endsection()

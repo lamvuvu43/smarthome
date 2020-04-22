@@ -39,6 +39,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function (){
     Route::get('/home/show_form_device/get_floor/{id}','AddDeviceController@getfloor');
     Route::get('/home/show_form_device/get_room/{id}','AddDeviceController@getroom');
     Route::post('/home/show_form_device/add_device','AddDeviceController@store')->name('add_device.process');
+    Route::delete('/home/delete_con/{id}','AddDeviceController@destroy')->name('delete.process');
+    Route::get('/home/add_amount/{id}','AddDeviceController@get_amount_share')->name('get_amount.process');
+    Route::post('/home/update_controller/{id}','AddDeviceController@update')->name('update.process');
 });
 
 //

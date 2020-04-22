@@ -7,6 +7,7 @@ use App\Models\Floor;
 
 use App\Models\Device;
 
+use App\Models\House;
 use App\Models\Room;
 use App\Models\ModelController;
 use Illuminate\Http\Request;
@@ -48,11 +49,11 @@ class AddDeviceController extends Controller
         $id_mod = Device::where('mac', '=', $request['mac'])->get();
 //        DetailOfProduct::where('mac',$request['mac'])->update(['id_stt'=>'2']);
         if (count($id_mod) != 0) {
-            foreach ($id_mod as $item){
+            foreach ($id_mod as $item) {
 //                dd($item->id_devi);
-                ModelController::insert(['id_devi' =>$item->id_devi, 'id_user' => Auth::id(),'id_per'=>'3']);
+                ModelController::insert(['id_devi' => $item->id_devi, 'id_user' => Auth::id(), 'id_per' => '3']);
             }
-            DetailOfProduct::where('mac',$request['mac'])->update(['id_stt'=>'2']);
+            DetailOfProduct::where('mac', $request['mac'])->update(['id_stt' => '2']);
             return redirect()->back()->with('add_success', 'Bạn đang thêm thành công thiết bị');
         } else {
             return redirect()->back()->with('error_mac', 'Thiết bị bạn nhập không tồn
@@ -69,8 +70,9 @@ class AddDeviceController extends Controller
      */
     public function show($id)
     {
-        $get_controller=ModelController::where('id_con',$id)->get();
-        return view('edit_device');
+        $get_controller = ModelController::where('id_con', $id)->first();
+        $get_house = House::where('id_user', Auth::id())->get();
+        return view('edit_device', compact('get_controller', 'get_house'));
     }
 
     /**
@@ -91,9 +93,11 @@ class AddDeviceController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request,$id)
     {
-        //
+//        dd($request->all());
+        ModelController::where('id_con',$id)->update(['id_room'=>$request['select_room'],'name_con'=>$request['name_devi']]);
+        return  redirect()->route('list_device.show')->with('add_success','Đã cập thành công');
     }
 
     /**
@@ -104,14 +108,31 @@ class AddDeviceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // chưa xử lý xong đợi. ý kiến anh lộc
+        $get_id_devi = ModelController::where('id_con', $id)->first();
+
+        $get_mac = Device::where('id_devi', $get_id_devi->id_devi)->first();
+
+        $get_id_devi_by_mac = Device::where('mac', $get_mac->mac)->get();
+
+        foreach ($get_id_devi_by_mac as $item) {
+            ModelController::where('id_devi', $item->id_devi)->delete();
+//            echo $item->id_devi;
+//            break;
+        }
+        DetailOfProduct::where('mac', $get_mac->mac)->update(['id_stt' => '0']);
+//        ModelController::where('id_con',$id )->where('id_per',Auth::id())->delete();
+        // cửa sở hữu có quyền xoá thiết bị khỏi controller.
+        // Sau khi xoá update lại cột id_stt = 0 trong bảng detailofproduct
+        echo "Đã xoá thành công";
+
     }
 
     public function getfloor($id)
     {
         $floor = Floor::where('id_house', $id)->get();
         foreach ($floor as $item) {
-            echo "<option value='" . $item->id . "'>" . $item->name_floor . "</option>";
+            echo "<option value='" . $item->id_floor . "'>" . $item->name_floor . "</option>";
         }
     }
 
@@ -119,7 +140,14 @@ class AddDeviceController extends Controller
     {
         $room = Room::where('id_floor', $id)->get();
         foreach ($room as $item) {
-            echo "<option value='" . $item->id . "'>" . $item->name_room . "</option>";
+            echo "<option value='" . $item->id_room . "'>" . $item->name_room . "</option>";
         }
+    }
+
+    public function get_amount_share($id_devi)
+    {
+        $get_amout = ModelController::where('id_devi', $id_devi)->where('id_user', '!=', Auth::id())->where('id_per', '!=', '3')->get();
+        echo count($get_amout);
+//        echo $get_amout;
     }
 }

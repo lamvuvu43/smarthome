@@ -14,6 +14,7 @@
     <link href="{{asset('css/home_page.css')}}" rel="stylesheet">
     <script src="{{asset("js/style_script_button.js")}}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 {{--@if(Auth::check()==false)--}}
