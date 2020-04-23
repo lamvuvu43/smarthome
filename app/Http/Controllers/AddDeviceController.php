@@ -11,6 +11,7 @@ use App\Models\House;
 use App\Models\Permission;
 use App\Models\Room;
 use App\Models\ModelController;
+use App\Models\User;
 use Highlight\Mode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -47,20 +48,32 @@ class AddDeviceController extends Controller
      */
     public function store(Request $request)
     {
-//        dd($request['mac']);
-        $id_mod = Device::where('mac', '=', $request['mac'])->get();
+        $check_mac = DetailOfProduct::where('mac', $request['mac'])->first();
+        if ($check_mac != null) {
+            if ($check_mac->id_stt != 2) {
+                $id_mod = Device::where('mac', '=', $request['mac'])->get();
 //        DetailOfProduct::where('mac',$request['mac'])->update(['id_stt'=>'2']);
-        if (count($id_mod) != 0) {
-            foreach ($id_mod as $item) {
+
+                if (count($id_mod) != 0) {
+                    foreach ($id_mod as $item) {
 //                dd($item->id_devi);
-                ModelController::insert(['id_devi' => $item->id_devi, 'id_user' => Auth::id(), 'id_per' => '3']);
+                        ModelController::insert(['id_devi' => $item->id_devi, 'id_user' => Auth::id(), 'id_per' => '3']);
+                    }
+                    DetailOfProduct::where('mac', $request['mac'])->update(['id_stt' => '2']);
+                    return redirect()->back()->with('add_success', 'Bạn đang thêm thành công thiết bị');
+                } else {
+                    return redirect()->back()->with('error_mac', 'Thiết bị bạn nhập không tồn
+                                tại.Hoặc đã có người sử dụng Vui lòng kiểm tra lại');
+                }
+            } else {
+                return redirect()->back()->with('error_mac', 'Thiết bị bạn nhập không tồn
+                                tại.Hoặc đã có người sử dụng Vui lòng kiểm tra lại');
             }
-            DetailOfProduct::where('mac', $request['mac'])->update(['id_stt' => '2']);
-            return redirect()->back()->with('add_success', 'Bạn đang thêm thành công thiết bị');
         } else {
             return redirect()->back()->with('error_mac', 'Thiết bị bạn nhập không tồn
-                                tại.<br> Vui lòng kiểm tra lại');
+                                tại.Hoặc đã có người sử dụng Vui lòng kiểm tra lại');
         }
+
 
     }
 
@@ -181,7 +194,23 @@ class AddDeviceController extends Controller
 
     public function delete_device_share($id_devi, $id_user)
     {
-        ModelController::where('id_devi',$id_devi)->where('id_user',$id_user)->delete();
+        ModelController::where('id_devi', $id_devi)->where('id_user', $id_user)->delete();
         echo " Đã xoá thành công";
     }
+
+    public function show_form_share($id_con)
+    {
+        $get_controller = ModelController::where('id_con', $id_con)->first();
+        $user = User::where('id', '!=', Auth::id())->get();
+        $get_per = Permission::where('id_per', '!=', '3')->orderBy('id_per', 'DESC')->get();;
+        return view('show_form_share', compact('get_controller', 'user', 'get_per'));
+    }
+
+    public function show_form_share_process(Request $request, $id_con)
+    {
+//        dd($request->all());
+        ModelController::insert(['id_user'=>$request['id_user'],'id_per'=>$request['id_per'],'id_devi'=>$request['id_devi']]);
+        return redirect()->route('list_device.show')->with('add_success', 'Đã chia sẽ thiết bị thành công');
+    }
+
 }

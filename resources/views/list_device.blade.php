@@ -25,7 +25,8 @@
                             <th>Quyền</th>
                             <th class="so_ng_chia_se">Số người chia sẻ</th>
                             <th>Chức năng</th>
-                            <th>Chia sẻ</th>
+                            <th class="share">Chia sẻ</th>
+                            <th class="button-delete" style="display: none"> Thêm</th>
                         </tr>
                         </thead>
 
@@ -58,16 +59,24 @@
                                         Bạn không có quyền
                                     @endif
                                 </td>
-                                <td>
-                                    <button class="btn btn-link"><i class="fa fa-share-alt" aria-hidden="true"></i>
-                                    </button>
+                                <td class="share">
+                                    <a class="btn btn-link" href="{{route('show_form_share',$item->id_con)}}"><i
+                                            class="fa fa-share-alt" aria-hidden="true"></i>
+                                    </a>
                                 </td>
+                                <td class="button-delete" style="display: none"><a
+                                        href="{{route('edit_device.show',$item->id_con)}}"><i
+                                            class="btn btn-primary fa fa-pencil-square" aria-hidden="true"></i></a></td>
                             </tr>
+
                             @if($item->id_per != 3 )
                                 <script>
                                     $('.so_ng_chia_se').remove();
+                                    $('.share').remove();
+                                    $('.button-delete').show(200);
                                 </script>
                             @endif
+
                         @endforeach
                     </table>
                 </div>

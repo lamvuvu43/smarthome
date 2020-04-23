@@ -82,6 +82,8 @@
                 {{--                <a class="active" href="#home">Nhà 1</a>--}}
                 {{--                <a href="#news">Nhà 2</a>--}}
                 <a id="goback" style="display: none;"><i class="fa fa-undo" aria-hidden="true"></i></a>
+                <a href="{{route('list_home')}}"><i class="fa fa-home" aria-hidden="true"></i></i>
+                </a>
                 <a href="#contact" id="show_button_add">Quản lý</a>
             @endif()
             <a id="button_show_menu"><i class="fa fa-bars" aria-hidden="true"></i></a>
@@ -185,7 +187,8 @@
                         </div>
                         <div class="username_register pb-3">
                             <label class="lable_register" for="username_register">Họ và tên</label>
-                            <input type="text" placeholder="Họ và tên" name="username_register" id="username_register" value="">
+                            <input type="text" placeholder="Họ và tên" name="username_register" id="username_register"
+                                   value="">
                         </div>
                         <div class="phone_register pb-3">
                             <label class="lable_register" for="phone_register">Số điện thoại</label>
@@ -219,7 +222,8 @@
     @yield('list_device')
     @yield('edit_device')
     @yield('list_device_share')
-    @yield('form_device_share')
+    @yield('show_form_share')
+    @yield('form_edit_device_share')
 </div>
 <script>
     $(function () {

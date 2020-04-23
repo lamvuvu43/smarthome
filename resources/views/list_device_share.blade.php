@@ -43,7 +43,7 @@
                                     <td class="text-left">Không có thông tin</td>
                                 @endif
                                 @if($item->id_user!=null)
-                                    <td class="user_share">{{$item->user->full_name}} <span class="id_user">{{$item->id_user}}</span></td>
+                                    <td class="user_share">{{$item->user->full_name}} <span class="id_user" style="display: none">{{$item->id_user}}</span></td>
                                     <td>{{$item->permission->des_per}}</td>
                                 @else
                                     <td>Thiết bị chưa được chia sẻ</td>
@@ -90,7 +90,7 @@
                         <br>
                         <span>khỏi hệ thống</span> <br>
                         <p style="display: none" id="id_con"></p>
-                        <span id="id_user"></span>
+                        <span id="id_user" style="display: none"></span>
                     </div>
 
                     <!-- Modal footer -->

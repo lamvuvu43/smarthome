@@ -46,6 +46,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function (){
     Route::get('/home/show_edit_share_device/{id_con}','AddDeviceController@show_form_devi')->name('form.edit.share.show');
     Route::post('/home/update_share_device/{id_con}','AddDeviceController@update_share_device')->name('update_share_device.process');
     Route::delete('/home/delete_share_device/{id_dev}/{id_user}','AddDeviceController@delete_device_share');
+    Route::get('/home/form_edit_device_share/{id_devi}','AddDeviceController@show_form_share')->name('show_form_share');
+    Route::post('/home/form_edit_device_share/{id_devi}','AddDeviceController@show_form_share_process')->name('show_form_share.process');
 });
 
 //

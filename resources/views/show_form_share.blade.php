@@ -1,5 +1,5 @@
 @extends('welcome')
-@section('form_edit_device_share')
+@section('show_form_share')
     <div class="row">
         @if (session('add_success'))
             <div class="alert alert-success">
@@ -10,10 +10,11 @@
         <div class="col-12 col-md-12 col-lg-12 ">
             <div class="edit_device">
                 <div class="text-center pb-4 pt-3 title_edit_device">
-                    <h4 class="modal-title">Chỉnh sửa thông tin chia sẻ</h4>
+                    <h4 class="modal-title">Chia sẻ thiết bị</h4>
                 </div>
                 <div class="form_edit_device col-12 col-md-12 col-lg-12">
-                    <form class="form-group" action="{{route('update_share_device.process',$get_controller->id_con)}}" method="post">
+                    <form class="form-group"
+                          action="{{route('show_form_share.process',$get_controller->id_con)}}" method="post">
                         @csrf
                         <div class="form-group">
                             <label class="pb-2">ID thiết bị</label>
@@ -21,7 +22,7 @@
                         </div>
                         <div class="form-group">
                             <label for="name_devi" class="pb-2"> Tên thiết bị</label>
-                            <input class="form-control"  readonly value="{{$get_controller->name_con}}" name="name_devi"
+                            <input class="form-control" readonly value="{{$get_controller->name_con}}" name="name_devi"
                                    id="name_devi">
                         </div>
                         <div class="form-group" style="background-color: lightblue">
@@ -37,21 +38,25 @@
                                               readonly> Chưa có thông tin</textarea>
                                 @endif
                             </div>
-                            <div class="address">
-                                <label for="address" class="pb-2 pt-2">Tên người được chia sẽ</label>
-                                <input class="form-control" value="{{$get_controller->user->full_name}}" readonly>
+                            <div class="select-user">
+                                <label for="id_user" class="pt-2 pb-2">Chọn tài khoản chia sẻ</label>
+                                <select name="id_user" id="id_user" class="form-control">
+                                    @foreach($user as $item)
+                                        <option value="{{$item->id}}">{{$item->full_name}} - {{$item->email}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                             <div class="select-per">
                                 <label for="id_per" class="pt-2 pb-2">Quyền điều khiển</label>
                                 <select name="id_per" id="id_per" class="form-control">
                                     @foreach($get_per as $item)
                                         <option
-                                            value="{{$item->id_per}}" <?php echo ($item->id_per == $get_controller->id_per) ? 'selected' : '' ?> >{{$item->des_per}}</option>
+                                            value="{{$item->id_per}}">{{$item->des_per}}</option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="btn_submit text-center mt-2 ">
-                                <button type="submit" class="btn btn-primary mb-2">Cập nhật</button>
+                                <button type="submit" class="btn btn-primary mb-2">Chia sẽ</button>
                             </div>
                         </div>
                     </form>
