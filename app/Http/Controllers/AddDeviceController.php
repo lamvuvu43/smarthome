@@ -8,8 +8,10 @@ use App\Models\Floor;
 use App\Models\Device;
 
 use App\Models\House;
+use App\Models\Permission;
 use App\Models\Room;
 use App\Models\ModelController;
+use Highlight\Mode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -93,11 +95,12 @@ class AddDeviceController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request)
     {
 //        dd($request->all());
-        ModelController::where('id_con',$id)->update(['id_room'=>$request['select_room'],'name_con'=>$request['name_devi']]);
-        return  redirect()->route('list_device.show')->with('add_success','Đã cập thành công');
+
+        ModelController::where('id_devi', $request['id_devi'])->update(['id_room' => $request['select_room'], 'name_con' => $request['name_devi']]);
+        return redirect()->route('list_device.show')->with('add_success', 'Đã cập thành công');
     }
 
     /**
@@ -146,8 +149,39 @@ class AddDeviceController extends Controller
 
     public function get_amount_share($id_devi)
     {
-        $get_amout = ModelController::where('id_devi', $id_devi)->where('id_user', '!=', Auth::id())->where('id_per', '!=', '3')->get();
+        $get_amout = ModelController::where('id_devi', '=', $id_devi)->where('id_user', '!=', Auth::id())->where('id_per', '!=', '3')->get();
         echo count($get_amout);
 //        echo $get_amout;
+    }
+
+    public function list_share($id_devi)
+    {
+        $check_per = ModelController::where('id_user', Auth::id())->where('id_devi', $id_devi)->first();
+        if ($check_per == null) {
+            return redirect()->route('logout');
+        }
+        $list_share = ModelController::where('id_devi', '=', $id_devi)->where('id_per', '!=', '3')->get();
+
+        return view('list_device_share', compact('list_share', 'check_per'));
+    }
+
+    public function show_form_devi($id_con)
+    {
+        $get_per = Permission::where('id_per', '!=', '3')->get();
+        $get_controller = ModelController::where('id_con', $id_con)->first();
+        return view('form_edit_device_share', compact('get_controller', 'get_per'));
+    }
+
+    public function update_share_device(Request $request, $id)
+    {
+//        dd($request->all());
+        ModelController::where('id_con', $id)->update(['id_per' => $request['id_per']]);
+        return redirect()->route('list.share.show', $request['id_devi'])->with('add_success', 'Đã cập nhật quyền thành công');
+    }
+
+    public function delete_device_share($id_devi, $id_user)
+    {
+        ModelController::where('id_devi',$id_devi)->where('id_user',$id_user)->delete();
+        echo " Đã xoá thành công";
     }
 }

@@ -23,6 +23,7 @@
                             <th scope="col">Vị trí thiết bị</th>
                             <th scope="col">Tên người dùng</th>
                             <th>Quyền</th>
+                            <th class="so_ng_chia_se">Số người chia sẻ</th>
                             <th>Chức năng</th>
                             <th>Chia sẻ</th>
                         </tr>
@@ -33,28 +34,40 @@
 
                                 <td style="display: none">{{$item->id_con}}</td>
 
-                                <td class="id_device">{{$item->id_devi}}</td>
+                                <td>{{$item->id_devi}}</td>
                                 <td>{{$item->name_con}}</td>
 
                                 @if($item->room != null)
-                                    <td class="text-left">Phòng: {{$item->room->name_room}}
-                                        - Tầng: {{$item->room->floor->name_floor}}
-                                        - Nhà:{{$item->room->floor->house->name_house}}</td>
+                                    <td class="text-left">Nhà:{{$item->room->floor->house->name_house}}
+                                        -Tầng: {{$item->room->floor->name_floor}}-Phòng: {{$item->room->name_room}}
+                                    </td>
                                 @else
                                     <td class="text-left">Không có thông tin</td>
                                 @endif
                                 <td>{{$item->user->full_name}} </td>
                                 <td>{{$item->permission->des_per}}</td>
+                                <td class="amount_share so_ng_chia_se" style="display: none">{{$item->id_devi}}</td>
                                 <td>
-                                    <button class="btn_remove_con" data-toggle="modal" data-target="#delete-controller"
-                                            data><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    <a href="{{route('edit_device.show',$item->id_con)}}"><i
-                                            class="btn btn-primary fa fa-pencil-square" aria-hidden="true"></i></a>
+                                    @if(Auth::id()==$item->id_user && $item->id_per == 3 )
+                                        <button class="btn btn-danger btn_remove_con" data-toggle="modal"
+                                                data-target="#delete-controller"
+                                                data><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                        <a href="{{route('edit_device.show',$item->id_con)}}"><i
+                                                class="btn btn-primary fa fa-pencil-square" aria-hidden="true"></i></a>
+                                    @else
+                                        Bạn không có quyền
+                                    @endif
                                 </td>
                                 <td>
-                                    <button class="btn btn-link"><i class="fa fa-share-alt" aria-hidden="true"></i> </button>
+                                    <button class="btn btn-link"><i class="fa fa-share-alt" aria-hidden="true"></i>
+                                    </button>
                                 </td>
                             </tr>
+                            @if($item->id_per != 3 )
+                                <script>
+                                    $('.so_ng_chia_se').remove();
+                                </script>
+                            @endif
                         @endforeach
                     </table>
                 </div>
@@ -91,6 +104,7 @@
             </div>
         </div>
     </div>
+
     <script>
         $('#goback').show();
         $('.header').hide(200);
@@ -124,23 +138,23 @@
         })
         // -------------------xoá controller------------------------
         $('.btn_remove_con').click(function () {
-            var $id_con = $(this).parent().parent().find('td').html();
-            var $name_device = $(this).parent().parent().find('td').next().next().html();
-            var $address_device = $(this).parent().parent().find('td').next().next().next().html();
-            $('#name_device').html($name_device);
-            $('#address_devi').html($address_device);
-            $('#id_con').html($id_con);
+            var id_con = $(this).parent().parent().find('td').html();
+            var name_device = $(this).parent().parent().find('td').next().next().html();
+            var address_device = $(this).parent().parent().find('td').next().next().next().html();
+            $('#name_device').html(name_device);
+            $('#address_devi').html(address_device);
+            $('#id_con').html(id_con);
             // console.log($address_device);
         });
 
         $('.btn-delete-controller').click(function () {
-            var $id_con = $('#id_con').html();
+            var id_con = $('#id_con').html();
             var token = $("meta[name='csrf-token']").attr("content");
             $.ajax({
-                url: "../home/delete_con/" + $id_con,
+                url: "../home/delete_con/" + id_con,
                 type: 'DELETE',
                 data: {
-                    "id": $id_con,
+                    "id": id_con,
                     "_token": token,
                 },
                 success: function (data) {
@@ -152,15 +166,31 @@
         })
         // ----------------------------------------------
         window.onload = function () {
-            var $amountClass = $('.id_device').length;
+            // var id_device = $('.amount_share').html();
+            // setTimeout( function () {
+            //     $('.amount_share').addClass(id_device);
+            //     // $('.'+id_device+'').hide(500);
+            //     $.get('../home/add_amount/'+ id_device,function (data) {
+            //         $('.'+id_device+'').html(data)
+            //         console.log(id_device);
+            //     })
+            // },200);
+            amount_class = $('.amount_share').length;
+            for (i = 0; i < amount_class; i++) {
+                var id_device = $('.amount_share:eq(' + i + ')').html();
 
-            for ($i = 0; $i < $amountClass; $i++) {
-                $id_devi = $('.id_device:eq(' + $i + ')').html();
-                $.get('../home/add_amount/' + $id_devi, function (data) {
-                    array_amount.push(data);
-                });
+                $('.amount_share:eq(' + i + ')').addClass(id_device);
+                change_amount(id_device);
+                // console.log('in i' + id_device);
             }
 
+            function change_amount(id_device) {
+                $('.' + id_device + '').show(300);
+                $.get('../home/add_amount/' + id_device, function (data) {
+                    dataPlus = '<a class="btn btn-link" href="http://127.0.0.1:8000/admin/home/list_share/' + id_device + '">' + data + '</a>';
+                    $('.' + id_device + '').html(dataPlus);
+                });
+            }
         }
     </script>
 @endsection()

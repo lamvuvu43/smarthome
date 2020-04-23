@@ -14,11 +14,11 @@
                 </div>
                 <div class="form_edit_device col-12 col-md-12 col-lg-12">
                     {{--                {{dd($get_controller)}}--}}
-                    <form class="form-group" action="{{route('update.process',$get_controller->id_con)}}" method="post">
+                    <form class="form-group" action="{{route('update.process')}}" method="post">
                         @csrf
                         <div class="form-group">
                             <label class="pb-2">ID thiết bị</label>
-                            <input class="form-control" readonly value="{{$get_controller->id_devi}}">
+                            <input class="form-control" readonly value="{{$get_controller->id_devi}}" name="id_devi">
                         </div>
                         <div class="form-group">
                             <label for="name_devi" class="pb-2"> Tên thiết bị</label>
@@ -30,9 +30,17 @@
                             <div class="select-house">
                                 <label for="select_home" class="pb-2 pt-2">Chọn ngôi nhà</label>
                                 <select name="select_house" id="select_home" class="form-control pb-2 pt-2">
-                                    @foreach($get_house as $item)
-                                        <option value="{{$item->id_house}}">{{$item->name_house}}</option>
-                                    @endforeach
+                                    @if($get_controller->id_floor != null)
+                                        @foreach($get_house as $item)
+                                            <option
+                                                value="{{$item->id_house}}"<?php echo ($item->id_house == $get_controller->room->floor->house->id_house) ? "selected" : '' ?>>{{$item->name_house}}</option>
+                                        @endforeach
+                                    @else
+                                        @foreach($get_house as $item)
+                                            <option
+                                                value="{{$item->id_house}}">{{$item->name_house}}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
                             </div>
                             <div class="select-floor">

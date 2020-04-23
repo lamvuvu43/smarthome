@@ -209,7 +209,6 @@
         {{--    </div>--}}
 
     </div>
-
     @yield('control_led')
     @yield('show_room')
     @yield('form_add_home')
@@ -219,6 +218,8 @@
     @yield('add_device')
     @yield('list_device')
     @yield('edit_device')
+    @yield('list_device_share')
+    @yield('form_device_share')
 </div>
 <script>
     $(function () {
