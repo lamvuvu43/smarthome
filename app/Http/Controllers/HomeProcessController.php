@@ -7,8 +7,7 @@ use App\Models\House;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Validator;
+
 
 class HomeProcessController extends Controller
 {
@@ -120,19 +119,41 @@ class HomeProcessController extends Controller
 
     public function create_room(Request $request)
     {
-        for($i=0;$i<count($request['name_room']);$i++){
-            Room::insert(['id_floor'=>$request['id_floor'],'name_room'=>$request['name_room'][$i]]);
+        for ($i = 0; $i < count($request['name_room']); $i++) {
+            Room::insert(['id_floor' => $request['id_floor'], 'name_room' => $request['name_room'][$i]]);
         }
-        return redirect()->back()->with('success','Đã thêm phòng thàng công');
+        return redirect()->back()->with('success', 'Đã thêm phòng thàng công');
     }
-    public function get_room($id_floor){
-        $get_room = Room::where('id_floor',$id_floor)->get();
+
+    public function get_room($id_floor)
+    {
+        $get_room = Room::where('id_floor', $id_floor)->get();
         echo "  <tr><th colspan=\"2\">Các phòng đã có </th></tr>
                         <tr><th>STT</th> <th>Tên Phòng</th></tr>";
-        foreach ($get_room as $i => $item){
+        foreach ($get_room as $i => $item) {
             $i++;
 
             echo "<tr><td>$i</td><td>$item->name_room</td></tr>";
         }
+    }
+
+    public function list_house()
+    {
+//        dd('đã đến đây');
+        $get_house = House::where('id_user', Auth::id())->get();
+        return view('house.list_house', compact('get_house'));
+    }
+
+    public function show_edit_house($id)
+    {
+        $get_house = House::where('id_house', $id)->first();
+        return view('house.edit_house', compact('get_house'));
+    }
+
+    public function edit_house_process(Request $request, $id)
+    {
+//        dd($request->all());
+        House::where('id_house', $id)->update(['name_house' => $request['name_house']]);
+        return redirect()->route('list_house.show')->with('update_success', 'Đã cập nhật tên ngôi nhà thành công');
     }
 }

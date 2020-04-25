@@ -1,26 +1,34 @@
 @extends('welcome')
-@section('control_led')
-    {{--    --}}{{--    nhúng tiện ít button--}}
-    {{--    <script type="text/javascript"--}}
-    {{--            src="https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/js/bootstrap-extend.min.js"></script>--}}
-    {{--    <link rel="stylesheet"--}}
-    {{--          href="https://cdn.rawgit.com/Chalarangelo/bootstrap-extend/880420ae663f7c539971ded33411cdecffcc2134/css/bootstrap-extend.min.css"/>--}}
-    {{--    --}}{{--    ------------------------------------------- --}}
+@section('control_device')
+    @if(count($get_controller) == 0)
+        <div class="row">
+            <div class="col-12 col-md-12 col-lg-12 title_status">
+                <h1 style="color: #a71d2a;text-align: center;font-size: 25px">Hiện tại phòng này chưa có thiết
+                    bị</h1>
+            </div>
+        </div>
+    @endif
     <div class="row">
         <div class="col-sm-12 col-md-6 col-lg-6">
-            <div class="row mt-3 mr-2 led">
-                <label class="for">Đèn</label>
-                <input type="range" min="0" max="10" name="led" id="led">
-                <p></p>
-            </div>
+
+            @foreach($get_controller as $item)
+                <div class="row mt-3 mr-2 content-device">
+                    <label class="for">Tên thiết bị</label>
+                    <input type="range" min="{{$item->device->device_type->min_value}}"
+                           max="{{$item->device->device_type->max_value}}" name="{{$item->id_device}}"
+                           class="form-control control_device">
+                    <p></p>
+                </div>
+            @endforeach
         </div>
     </div>
     <script>
-        $('#led').change(function () {
+        $('#goback').show(200);
+        $('.control_device').change(function () {
             console.log($(this).val());
             $(this).parent().find("p").html($(this).val())
         })
-
+        // $('.title_status').show();
     </script>
 @endsection
 

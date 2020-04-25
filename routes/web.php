@@ -23,8 +23,11 @@ Route::GET('/logout','Auth\LoginController@logout')->name('logout');
 Route::POST('/register/','Auth\RegisterController@create')->name('register');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function (){
     Route::get('/show_room_of_home/{id}','ShowRoomController@index')->name('show_room_of_home');
-    Route::get('/control_device_room','ControlDevice@control_led')->name('control_device');
+    Route::get('/control_device_room/{id_room}','ControlDeviceController@list_device')->name('control_device.list');
     Route::get('/add_home','HomeProcessController@index')->name('add_home');
+    Route::get('/list_house','HomeProcessController@list_house')->name('list_house.show');
+    Route::get('/show_edit_house/{id}','HomeProcessController@show_edit_house')->name('show_edit_house.show');
+    Route::post('/edit_house/{id_house}','HomeProcessController@edit_house_process')->name('edit_house.process');
     Route::post('/add_home/processing','HomeProcessController@create')->name('add_home_processing');
     Route::get('/add_room','HomeProcessController@show_form_room')->name('show_form_room');
     Route::get('/add_room/jquery_get_floor/{id}','HomeProcessController@get_floor');
@@ -32,7 +35,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function (){
     Route::post('/add_room/processing','HomeProcessController@create_room')->name('add_room_processing');
     Route::get('/home','HomeProcessController@show')->name('list_home');
     Route::get('/home/floor/{id}','FloorProcessController@show')->name('list_floor');
+    Route::get('/home/list_floor_edit/{id}','FloorProcessController@list_floor_edit')->name('list_floor_edit');
+    Route::get('/home/show_floor_edit/{id}','FloorProcessController@show_floor_edit')->name('show_floor_edit');
+    Route::post('/home/floor_edit_process/{id}','FloorProcessController@floor_edit_process')->name('show_floor_edit.process');
     Route::get('/home/floor/room/{id}','RoomProcessController@show')->name('list_room');
+    Route::get('/home/floor/list_room_edit/{id_floor}','RoomProcessController@list_room_edit')->name('list_room_edit');
+    Route::get('/home/floor/show_room_edit/{id_room}','RoomProcessController@show_room_edit')->name('show_room_edit');
+    Route::post('/home/floor/show_room_edit_process/{id_room}','RoomProcessController@show_room_edit_process')->name('show_room_edit_process');
     Route::get('/home/show_form_device','AddDeviceController@index')->name('add_device.show');
     Route::get('/home/list_form_device','AddDeviceController@create')->name('list_device.show');
     Route::get('/home/edit_form_device/{id}','AddDeviceController@show')->name('edit_device.show');

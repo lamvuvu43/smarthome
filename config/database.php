@@ -56,7 +56,8 @@ return [
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'prefix_indexes' => true,
-            'strict' => true,
+//            'strict' => true, gốc chi tiết tham khảo taij https://stackoverflow.com/questions/40917189/laravel-syntax-error-or-access-violation-1055-error
+            'strict' => false,
             'engine' => null,
             'options' => extension_loaded('pdo_mysql') ? array_filter([
                 PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),

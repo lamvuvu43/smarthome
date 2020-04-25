@@ -88,10 +88,11 @@
             @endif()
             <a id="button_show_menu"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <div class="div_button_add">
-                <a class="button_add" href="{{route('add_home')}}">Thêm nhà </a>
+                <a class="button_add " href="{{route('add_home')}}">Thêm nhà</a>
                 <a class="button_add" href="{{route('show_form_room')}}">Thêm phòng </a>
                 <a class="button_add" href="{{route('add_device.show')}}">Thêm thiết bị</a>
                 <a class="button_add" href="{{route('list_device.show')}}">Danh sách thiết bị</a>
+                <a class="button_add" href="{{route('list_house.show')}}">Danh sách ngôi nhà</a>
             </div>
         </div>
         <div class="col- col-sm-6 col-md-6 col-lg-6 menu menu_login">
@@ -212,7 +213,7 @@
         {{--    </div>--}}
 
     </div>
-    @yield('control_led')
+    @yield('control_device')
     @yield('show_room')
     @yield('form_add_home')
     @yield('form_add_room')
@@ -224,6 +225,12 @@
     @yield('list_device_share')
     @yield('show_form_share')
     @yield('form_edit_device_share')
+    @yield('list_house')
+    @yield('edit_house')
+    @yield('list_floor_edit')
+    @yield('edit_floor')
+    @yield('list_room_edit')
+    @yield('edit_room')
 </div>
 <script>
     $(function () {

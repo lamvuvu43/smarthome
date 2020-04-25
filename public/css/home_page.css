@@ -123,10 +123,12 @@ body {
     padding-top: 20px;
 }
 
-.led {
+.content-device {
     border: #5cd08d 5px solid;
     padding-top: 9px;
     padding-bottom: 0px;
+    height:70px;
+    background-color: #4dc0b5;
 }
 
 .button-led {
@@ -285,7 +287,7 @@ body {
     display: block;
     position: absolute;
     z-index: 1000;
-    transform: translate(0%, 100%);
+    transform: translate(0%, 80%);
     background-color: rgb(183, 197, 115);
     padding-top: 0px;
 }
@@ -301,7 +303,9 @@ body {
 }
 
 .button_add {
-    display: none
+    display: none;
+    position: relative;
+    width: 20%;
 }
 
 .count-particles {
@@ -310,7 +314,6 @@ body {
     left: 0;
     z-index: -100;
 }
-
 #particles-js {
     position: absolute;
     top: 0;

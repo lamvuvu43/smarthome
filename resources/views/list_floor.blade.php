@@ -32,5 +32,10 @@
                $("#list_room").html(data);
            });
        })
+        $(document).on('click','.content-room',function () {
+           var id_room= $(this).find('.id_room').html();
+           window.location.replace('/admin/control_device_room/'+id_room);
+           console.log(id_room);
+        })
     </script>
 @endsection()

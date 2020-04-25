@@ -47,7 +47,7 @@ class FloorProcessController extends Controller
     public function show($id)
     {
         $floor = Floor::where('id_house', $id)->get();
-        return view('list_floor',compact('floor'));
+        return view('list_floor', compact('floor'));
     }
 
     /**
@@ -82,5 +82,25 @@ class FloorProcessController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function list_floor_edit($id)
+    {
+        $get_floor = Floor::where('id_house', $id)->get();
+//        dd($get_floor);
+        return view('floor.list_floor', compact('get_floor'));
+    }
+
+    public function show_floor_edit($id)
+    {
+        $get_floor = Floor::where('id_floor', $id)->first();
+        return view('floor.edit_floor', compact('get_floor'));
+    }
+
+    public function floor_edit_process(Request $request, $id)
+    {
+//        dd($request->all());
+        Floor::where('id_floor', $id)->update(['name_floor' => $request['name_floor']]);
+        return redirect()->route('list_floor_edit',$request['id_house'])->with('update_success','Đã cập nhật tên tầng thành công');
     }
 }
