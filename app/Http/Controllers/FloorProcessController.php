@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Floor;
+use App\Models\House;
 use Illuminate\Http\Request;
 
 class FloorProcessController extends Controller
@@ -86,15 +87,16 @@ class FloorProcessController extends Controller
 
     public function list_floor_edit($id)
     {
+        $get_house=House::where('id_house',$id)->first();
         $get_floor = Floor::where('id_house', $id)->get();
 //        dd($get_floor);
-        return view('floor.list_floor', compact('get_floor'));
+        return view('floor.list_floor', compact('get_floor','get_house'));
     }
 
     public function show_floor_edit($id)
     {
         $get_floor = Floor::where('id_floor', $id)->first();
-        return view('floor.edit_floor', compact('get_floor'));
+        return view('floor.edit_floor', compact('get_floor','get_floor'));
     }
 
     public function floor_edit_process(Request $request, $id)

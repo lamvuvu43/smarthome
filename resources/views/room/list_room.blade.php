@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('pageTitle','Danh sách phòng')
 @section('list_room_edit')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12 ">
@@ -10,7 +11,10 @@
             @endif
             <div class="list_device">
                 <div class="text-center pb-4 pt-3 title_edit_device">
-                    <h4 class="modal-title">Danh sách phòng</h4>
+                    <h4 class="modal-title">Danh sách phòng của tầng <span
+                            style="color: red">{{$get_floor->name_floor}}</span> thuộc ngôi nhà
+                        <span
+                            style="color: red">{{$get_floor->house->name_house}}</span></h4>
                 </div>
                 <div class="table_device col-12 col-md-12 col-lg-12">
                     <table class="table text-center table-striped ">

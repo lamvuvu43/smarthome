@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('pageTitle','Chỉnh sửa thiết bị')
 @section('edit_device')
     <div class="row">
         @if (session('add_success'))

@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('pageTitle','Thêm phòng')
 @section('form_add_room')
 
     <script>

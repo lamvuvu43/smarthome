@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('pageTitle','Chỉnh sửa nhà')
 @section('edit_house')
     <div class="row">
         @if (session('add_success'))

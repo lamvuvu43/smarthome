@@ -18,7 +18,7 @@ class HomeProcessController extends Controller
      */
     public function index()
     {
-        return view('form_add_home');
+        return view('house.form_add_home');
     }
 
     /**
@@ -32,7 +32,7 @@ class HomeProcessController extends Controller
 //        dd($request['floor'][0]);
         $id_hosue = House::insertGetId(['id_user' => Auth::id(), 'name_house' => $request['house']]);
         if ($request['floor'][0] == null) {
-            Floor::insert(['id_house' => 1, 'name_floor' => 'Tầng trệt']);
+            Floor::insert(['id_house' => $id_hosue, 'name_floor' => 'Tầng trệt']);
         } else {
             for ($i = 0; $i < count($request['floor']); $i++) {
                 Floor::insert(['id_house' => $id_hosue, 'name_floor' => $request['floor'][$i]]);
@@ -113,8 +113,8 @@ class HomeProcessController extends Controller
 
     public function show_form_room()
     {
-        $get_house = House::where('id_user', Auth::id())->get();
-        return view('form_add_room', compact('get_house'));
+        $get_house = House::where('id_user', Auth::id())->orderBy('id_house','DESC')->get();
+        return view('room.form_add_room', compact('get_house'));
     }
 
     public function create_room(Request $request)

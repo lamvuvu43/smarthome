@@ -25,7 +25,7 @@ class AddDeviceController extends Controller
      */
     public function index()
     {
-        return view('add_device');
+        return view('device.add_device');
     }
 
     /**
@@ -37,7 +37,7 @@ class AddDeviceController extends Controller
     {
         $controller = ModelController::where('id_user', Auth::id())->get();
 //        dd($controller);
-        return view('list_device', compact('controller'));
+        return view('device.list_device', compact('controller'));
     }
 
     /**
@@ -87,7 +87,7 @@ class AddDeviceController extends Controller
     {
         $get_controller = ModelController::where('id_con', $id)->first();
         $get_house = House::where('id_user', Auth::id())->get();
-        return view('edit_device', compact('get_controller', 'get_house'));
+        return view('device.edit_device', compact('get_controller', 'get_house'));
     }
 
     /**
@@ -175,14 +175,14 @@ class AddDeviceController extends Controller
         }
         $list_share = ModelController::where('id_devi', '=', $id_devi)->where('id_per', '!=', '3')->get();
 
-        return view('list_device_share', compact('list_share', 'check_per'));
+        return view('share.list_device_share', compact('list_share', 'check_per'));
     }
 
     public function show_form_devi($id_con)
     {
         $get_per = Permission::where('id_per', '!=', '3')->get();
         $get_controller = ModelController::where('id_con', $id_con)->first();
-        return view('form_edit_device_share', compact('get_controller', 'get_per'));
+        return view('share.form_edit_device_share', compact('get_controller', 'get_per'));
     }
 
     public function update_share_device(Request $request, $id)
@@ -203,7 +203,7 @@ class AddDeviceController extends Controller
         $get_controller = ModelController::where('id_con', $id_con)->first();
         $user = User::where('id', '!=', Auth::id())->get();
         $get_per = Permission::where('id_per', '!=', '3')->orderBy('id_per', 'DESC')->get();;
-        return view('show_form_share', compact('get_controller', 'user', 'get_per'));
+        return view('share.show_form_share', compact('get_controller', 'user', 'get_per'));
     }
 
     public function show_form_share_process(Request $request, $id_con)

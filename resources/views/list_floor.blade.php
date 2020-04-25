@@ -2,7 +2,7 @@
 @section('list_floor')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12 title_status">
-            <h1 style="color: #a71d2a;text-align: center;font-size: 25px">Danh sách tầng nhà</h1>
+            <h1 style="color: #a71d2a;text-align: center;font-size: 25px">Danh sách tầng nhà </h1>
         </div>
     </div>
     <div class="row">

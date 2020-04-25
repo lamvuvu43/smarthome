@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('pageTitle','Danh sách thiết bị chia sẻ')
 @section('list_device_share')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12 ">

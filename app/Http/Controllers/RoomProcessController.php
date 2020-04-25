@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Floor;
 use App\Models\Room;
 use Illuminate\Http\Request;
 
@@ -102,8 +103,9 @@ class RoomProcessController extends Controller
 
     public function list_room_edit($id_floor)
     {
+        $get_floor = Floor::where('id_floor', $id_floor)->first();
         $get_room = Room::where('id_floor', $id_floor)->get();
-        return view('room.list_room', compact('get_room'));
+        return view('room.list_room', compact('get_room','get_floor'));
     }
 
     public function show_room_edit($id_room)

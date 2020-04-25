@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('pageTitle','Chỉnh sửa chia sẻ')
 @section('form_edit_device_share')
     <div class="row">
         @if (session('add_success'))

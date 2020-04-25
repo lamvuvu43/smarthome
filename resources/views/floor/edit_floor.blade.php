@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('pageTitle','Chỉnh sửa tầng')
 @section('edit_floor')
     <div class="row">
         @if (session('add_success'))
@@ -10,7 +11,7 @@
         <div class="col-12 col-md-12 col-lg-12 ">
             <div class="edit_device">
                 <div class="text-center pb-4 pt-3 title_edit_device">
-                    <h4 class="modal-title">Chỉnh sửa tầng</h4>
+                    <h4 class="modal-title">Chỉnh sửa tầng của nhà <span style="color: red">{{$get_floor->house->name_house}}</span></h4>
                 </div>
                 <div class="form_edit_device col-12 col-md-12 col-lg-12">
                     <form class="form-group" action="{{route('show_floor_edit.process',$get_floor->id_floor)}}" method="post">

@@ -1,5 +1,5 @@
 @extends('welcome')
-
+@section('pageTitle','Thêm nhà')
 @section('form_add_home')
     <script>
         $(function () {

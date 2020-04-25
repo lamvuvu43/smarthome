@@ -1,4 +1,5 @@
 @extends('welcome')
+@section('pageTitle','Thêm thiết bị')
 @section('add_device')
     <div class="row">
         <div class="col-12 col-md-12 col-lg-12">
