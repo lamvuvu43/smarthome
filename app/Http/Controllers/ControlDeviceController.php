@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ControlHistory;
+use App\Models\DataUpHistory;
 use App\Models\Device;
 use App\Models\ModelController;
 use Illuminate\Http\Request;
@@ -25,5 +26,9 @@ class ControlDeviceController extends Controller
     {
         ControlHistory::insert(['id_con'=>$id_con,'con_time'=>date('Y/m/d h:i:sa'),'value_input'=>$value]);
         echo "Success controll";
+    }
+    public  function api($id_devi,$value){
+        Device::where('id_devi',$id_devi)->update(['devi_value'=>$value]);
+        DataUpHistory::insert(['id_devi'=>$id_devi,'dt_up'=>date('Y/m/d h:i:sa'),'value_up'=>$value]);
     }
 }

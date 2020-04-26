@@ -22,7 +22,7 @@
                 <div class="title_form_add_home  mb-3 text-center"><h2>Thêm phòng</h2></div>
                 <div class="form-group name_house pr-2 pl-2">
                     <label for="id_house">Tên nhà</label>
-                    <select name="id_house" class="form-control" id="id_house">
+                    <select name="id_house" class="form-control select_house" id="id_house">
                         @foreach($get_house as $item)
                             <option value="{{$item->id_house}}">{{$item->name_house}}</option>
                         @endforeach

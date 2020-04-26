@@ -576,3 +576,10 @@ body {
         border: #171a1d solid;
     }
 }
+@keyframes select_house{
+    from{border: solid 2px red}
+    to {border: solid 2px yellow}
+}
+.select_house{
+
+}
