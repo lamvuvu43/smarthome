@@ -24,6 +24,8 @@ Route::POST('/register/','Auth\RegisterController@create')->name('register');
 Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function (){
     Route::get('/show_room_of_home/{id}','ShowRoomController@index')->name('show_room_of_home');
     Route::get('/control_device_room/{id_room}','ControlDeviceController@list_device')->name('control_device.list');
+    Route::get('/control_checkbox_process/{id_devi}/{value}','ControlDeviceController@control_checkbox')->name('control_checkbox_process');
+    Route::get('/control_range_process/{id_devi}/{value}','ControlDeviceController@control_range')->name('control_range_process');
     Route::get('/add_home','HomeProcessController@index')->name('add_home');
     Route::get('/list_house','HomeProcessController@list_house')->name('list_house.show');
     Route::get('/show_edit_house/{id}','HomeProcessController@show_edit_house')->name('show_edit_house.show');

@@ -52,9 +52,9 @@ class RoomProcessController extends Controller
         if ($room != null) {
             foreach ($room as $item) {
 
-                echo "  <div class=\"col-sm-12 col-md-6 col-lg-3 location loc-2 content-room \">
-            <div class=\"location-content \">$item->name_room</div>
-            <div class='id_room' style='display: none'>$item->id_room</div>
+                echo "<div class=\"col-sm-12 col-md-6 col-lg-3 location loc-2 content-room \">
+            <div class=\"location-content \"><a href='/admin/control_device_room/".$item->id_room."'>$item->name_room</a> </div>
+            
         </div>";
 
             }
@@ -105,7 +105,7 @@ class RoomProcessController extends Controller
     {
         $get_floor = Floor::where('id_floor', $id_floor)->first();
         $get_room = Room::where('id_floor', $id_floor)->get();
-        return view('room.list_room', compact('get_room','get_floor'));
+        return view('room.list_room', compact('get_room', 'get_floor'));
     }
 
     public function show_room_edit($id_room)
