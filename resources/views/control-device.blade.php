@@ -21,7 +21,7 @@
                             <label class="form-group"
                                    style="float: right">@if($item->name_con == null)  {{$item->id_devi}} @else  {{$item->name_con}}@endif</label>
                             <input type="checkbox" data-toggle="toggle" data-on="Mở" data-off="Tắt"
-                                   class="checkbox_input" data-id="{{$item->device->id_devi}}">
+                                   class="checkbox_input" data-id="{{$item->device->id_devi}}" data-id_con="{{$item->id_con}}">
                         </div>
                         @if($item->device->devi_value==1)
                             <script>
@@ -40,7 +40,7 @@
                             <input type="range" min="{{$item->device->device_type->min_value}}"
                                    max="{{$item->device->device_type->max_value}}" name="{{$item->id_device}}"
                                    class="form-control control_device slider input_range"
-                                   value="{{$item->device->devi_value}}" data-id="{{$item->id_devi}}">
+                                   value="{{$item->device->devi_value}}" data-id="{{$item->id_devi}}" data-id_con="{{$item->id_con}}">
 
                         </div>
                     </div>
@@ -74,19 +74,20 @@
 
         })
         $('.checkbox_input').change(function () {
+            var id_device = $(this).data('id');
+            var id_con= $(this).data('id_con');
             if ($(this).prop("checked") == true) {
-                var id_device = $(this).data('id')
-                // console.log($(this).data('id'));
 
-                $.get('../control_checkbox_process/' + id_device + '/' + 1, function (data) {
-                    console.log(data);
+                console.log(id_con);
+
+                $.get('../control_checkbox_process/' + id_con + '/' + 1, function (data) {
+                    // console.log(data);
                 })
             } else if ($(this).prop("checked") == false) {
-                var id_device = $(this).data('id')
                 console.log("không check");
 
-                $.get('../control_checkbox_process/' + id_device + '/' + 0, function (data) {
-                    console.log(data);
+                $.get('../control_checkbox_process/' + id_con + '/' + 0, function (data) {
+                    // console.log(data);
                 })
             }
 
@@ -94,8 +95,9 @@
         $('.input_range').change(function () {
             var value = $(this).val();
             var id_device=$(this).data('id');
+            var id_con= $(this).data('id_con');
             console.log(value + '_'+id_device);
-            $.get('../control_range_process/' + id_device + '/' + value, function (data) {
+            $.get('../control_range_process/' + id_con + '/' + value, function (data) {
                 console.log(data);
             })
         })

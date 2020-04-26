@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ControlHistory;
 use App\Models\Device;
 use App\Models\ModelController;
 use Illuminate\Http\Request;
+use Symfony\Component\VarDumper\Cloner\Data;
 
 class ControlDeviceController extends Controller
 {
@@ -14,14 +16,14 @@ class ControlDeviceController extends Controller
         return view('control-device', compact('get_controller'));
     }
 
-    public function control_checkbox($id_devi, $value)
+    public function control_checkbox($id_con, $value)
     {
-        Device::where('id_devi', $id_devi)->update(['devi_value' => $value]);
+        ControlHistory::insert(['id_con'=>$id_con,'con_time'=>date('Y/m/d h:i:sa'),'value_input'=>$value]);
         echo "Success controll";
     }
-    public function control_range($id_devi, $value)
+    public function control_range($id_con, $value)
     {
-        Device::where('id_devi', $id_devi)->update(['devi_value' => $value]);
+        ControlHistory::insert(['id_con'=>$id_con,'con_time'=>date('Y/m/d h:i:sa'),'value_input'=>$value]);
         echo "Success controll";
     }
 }
