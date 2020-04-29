@@ -26,7 +26,7 @@
                             <th class="so_ng_chia_se">Số người chia sẻ</th>
                             <th>Chức năng</th>
                             <th class="share">Chia sẻ</th>
-                            <th class="button-delete" style="display: none"> Thêm</th>
+                            {{--                            <th class="button-delete" style="display: none"> Thêm</th>--}}
                         </tr>
                         </thead>
 
@@ -46,8 +46,13 @@
                                     <td class="text-left">Không có thông tin</td>
                                 @endif
                                 <td>{{$item->user->full_name}} </td>
-                                <td>{{$item->permission->des_per}}</td>
-                                <td class="amount_share so_ng_chia_se" style="display: none">{{$item->id_devi}}</td>
+                                @if($item->id_per != 2)
+                                    <td>{{$item->permission->des_per}}</td>
+                                @else
+                                    <td><a href="{{route('control_device_share',$item->id_con)}}">{{$item->permission->des_per}}</a></td>
+                                @endif
+                                <td class="amount_share so_ng_chia_se">{{$item->id_devi}}</td>
+
                                 <td>
                                     @if(Auth::id()==$item->id_user && $item->id_per == 3 )
                                         <button class="btn btn-danger btn_remove_con" data-toggle="modal"
@@ -59,23 +64,33 @@
                                         Bạn không có quyền
                                     @endif
                                 </td>
-                                <td class="share">
-                                    <a class="btn btn-link" href="{{route('show_form_share',$item->id_con)}}"><i
-                                            class="fa fa-share-alt" aria-hidden="true"></i>
-                                    </a>
-                                </td>
-                                <td class="button-delete" style="display: none"><a
-                                        href="{{route('edit_device.show',$item->id_con)}}"><i
-                                            class="btn btn-primary fa fa-pencil-square" aria-hidden="true"></i></a></td>
+                                @if($item->id_per === 3)
+                                    <td class="share">
+                                        <a class="btn btn-link" href="{{route('show_form_share',$item->id_con)}}"><i
+                                                class="fa fa-share-alt" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                @else
+                                    <td>Bạn không có quyền</td>
+                                @endif
+                                {{--                                <td class="button-delete" style="display: none"><a--}}
+                                {{--                                        href="{{route('edit_device.show',$item->id_con)}}"><i--}}
+                                {{--                                            class="fa fa-share-alt" aria-hidden="true"></i></a></td>--}}
                             </tr>
 
-                            @if($item->id_per != 3 )
-                                <script>
-                                    $('.so_ng_chia_se').remove();
-                                    $('.share').remove();
-                                    $('.button-delete').show(200);
-                                </script>
-                            @endif
+                            {{--                            @if($item->id_per != 3 )--}}
+                            {{--                                <script>--}}
+                            {{--                                    // $('.so_ng_chia_se').remove();--}}
+                            {{--                                    $('.share').remove();--}}
+                            {{--                                    $('.button-delete').show(200);--}}
+                            {{--                                </script>--}}
+                            {{--                            @endif--}}
+                            {{--                            @if($item->id_per ==3)--}}
+                            {{--                                <script>--}}
+                            {{--                                    $('.so_ng_chia_se').show();--}}
+
+                            {{--                                </script>--}}
+                            {{--                            @endif--}}
 
                         @endforeach
                     </table>

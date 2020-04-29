@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Floor;
 use App\Models\House;
+use App\Models\ModelController;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -113,7 +114,7 @@ class HomeProcessController extends Controller
 
     public function show_form_room()
     {
-        $get_house = House::where('id_user', Auth::id())->orderBy('id_house','DESC')->get();
+        $get_house = House::where('id_user', Auth::id())->orderBy('id_house', 'DESC')->get();
         return view('room.form_add_room', compact('get_house'));
     }
 
@@ -155,5 +156,25 @@ class HomeProcessController extends Controller
 //        dd($request->all());
         House::where('id_house', $id)->update(['name_house' => $request['name_house']]);
         return redirect()->route('list_house.show')->with('update_success', 'Đã cập nhật tên ngôi nhà thành công');
+    }
+
+    public function delete_house($id_house)
+    {
+        $get_floor = Floor::where('id_house', $id_house)->first();
+        $get_room= Room::where('id_floor',$get_floor->id_floor)->get();
+        if(count($get_room)>0){
+            Room::where('id_floor', $get_floor->id_floor)->delete();
+            Floor::where('id_house', $id_house)->delete();
+            House::where('id_house', $id_house)->delete();
+        }else{
+            Floor::where('id_house', $id_house)->delete();
+            House::where('id_house', $id_house)->delete();
+        }
+        echo "Đã xoá xong";
+//        echo count($get_con);
+//        if($get_con== null){
+//
+//        }
+
     }
 }

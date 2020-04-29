@@ -61,7 +61,11 @@
             @endif
 
         @endforeach
-
+        <form action="{{route('mqtt')}}" method="GET" style="display: none" class="khongcantoi">
+            <input id="id_devi_form" name="id_devi" value="">
+            <input id="value_form" name="value" value="">
+            <button type="submit" id="btn_submit" >submit</button>
+        </form>
     </div>
     <script>
         $('#goback').show();
@@ -78,17 +82,33 @@
             var id_con= $(this).data('id_con');
             if ($(this).prop("checked") == true) {
 
-                console.log(id_con);
+                // console.log(id_con);
 
                 $.get('../control_checkbox_process/' + id_con + '/' + 1, function (data) {
-                    // console.log(data);
+                    console.log(data);
                 })
+                // -----------------------send to server mqtt-------------------
+                $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+1,function (data) {
+                    console.log('connect success');
+                })
+                // ----------------------------------------------------------------
+                // $('#id_devi_form').val(id_device);
+                // $('#value_form').val('1');
+                // $('#btn_submit').click();
             } else if ($(this).prop("checked") == false) {
                 console.log("không check");
 
                 $.get('../control_checkbox_process/' + id_con + '/' + 0, function (data) {
-                    // console.log(data);
-                })
+                    console.log(data);
+                });
+                // -----------------------send to server mqtt-------------------
+                $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+0, function (data) {
+                    console.log('connect sucess');
+                });
+                // -----------------------send to server mqtt-------------------
+                // $('#id_devi_form').val(id_device);
+                // $('#value_form').val('0');
+                // $('#btn_submit').click();
             }
 
         })
@@ -99,7 +119,15 @@
             console.log(value + '_'+id_device);
             $.get('../control_range_process/' + id_con + '/' + value, function (data) {
                 console.log(data);
-            })
+            });
+
+
+            // $('#id_devi_form').val(id_device);
+            // $('#value_form').val(value);
+            // $('#btn_submit').click();
+            $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+value, function (data) {
+                console.log('connect sucess');
+            });
         })
     </script>
 @endsection

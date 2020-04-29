@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>SmartHome - @yield('pageTitle')</title>
+    <title>SmartHome  @yield('pageTitle')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
@@ -98,7 +98,7 @@
             </div>
         </div>
         <div class="col- col-sm-6 col-md-6 col-lg-6 menu menu_login">
-            <a href="#contact">Hỗ trợ</a>
+            <a href="{{route('list_con_his')}}">Lịch sử điều khiển</a>
             @if(Auth::check()==true)
                 <a style="text-transform: uppercase;"
                    id="show_button_logout">{{Auth::user()->last_name}} {{Auth::user()->full_name}}</a>
@@ -233,6 +233,7 @@
     @yield('edit_floor')
     @yield('list_room_edit')
     @yield('edit_room')
+    @yield('list_con_his')
 </div>
 <script>
     $(function () {

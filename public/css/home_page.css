@@ -611,3 +611,18 @@ body {
     /*animation-delay: 2s; !*độ trể xuất hiện*!*/
     animation-direction: reverse;
 }
+@keyframes caution {
+    from{
+        color: #ffed4a;
+    }
+    to {
+        color: blue;
+    }
+}
+ #caution{
+     color: #97FFFF;
+     animation-name: caution;
+     animation-duration: 2s;
+     animation-iteration-count: infinite;
+     animation-direction: reverse;
+ }

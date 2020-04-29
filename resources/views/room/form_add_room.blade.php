@@ -72,10 +72,10 @@
     <script>
         $('#add_room').click(function () {
 
-            var $room = $('.add_room').find('.name_room').html();
-            var $roomplus = '<div class="form-group name_room pr-2 pl-2" >  <a style="float: right;color: white" class=" btn btn-danger btn_remove">Xoá</a>'+ $room + "</div>";
-            console.log($roomplus);
-            $('.add_floor').append($roomplus);
+            var room = $('.add_room').find('.name_room').html();
+            var roomplus = '<div class="form-group name_room pr-2 pl-2" >  <a style="float: right;color: white" class=" btn btn-danger btn_remove">Xoá</a>'+ room + "</div>";
+            // console.log($roomplus);
+            $('.add_room').append(roomplus);
         })
         $(document).on('click','.btn_remove',function () { // cứ pháp này được sử dụng khi class được thêm sao khi load page
             // console.log('clicking');
