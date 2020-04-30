@@ -72,7 +72,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/mqtt', 'MQTTController@mqtt')->name('mqtt');
 
     Route::get('/home/list_con_his','ControlHistoryController@select_con')->name('list_con_his');
-    Route::get('/home/list_con_his/jquery/{id_con}','ControlHistoryController@list_con_his');
+    Route::get('/home/list_con_his/jquery/{id_devi}','ControlHistoryController@list_con_his');
+    Route::get('/home/list_con_his/lis_his_devi/{id_devi}','ControlHistoryController@lis_his_devi')->name('lis_his_devi');
 
 });
 

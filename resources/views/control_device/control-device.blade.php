@@ -16,12 +16,17 @@
             @if($item->device->device_type->max_value ==1)
 
                 <div class="col-sm-12 col-md-6 col-lg- mt-2">
-                    <div class="content-device" style="line-height: 80px">
+                    <div class="content-device" style="line-height: 30px">
                         <div class="checkbox">
+                            <div class="his_control text-right "><a href="{{route('lis_his_devi',$item->id_devi)}}">Lịch sử điều khiển</a></div>
                             <label class="form-group"
-                                   style="float: right">@if($item->name_con == null)  {{$item->id_devi}} @else  {{$item->name_con}}@endif</label>
+                                   style="float: right">@if($item->name_con == null)  {{$item->id_devi}} @else  {{$item->name_con}}@endif
+                            </label>
+
+
                             <input type="checkbox" data-toggle="toggle" data-on="Mở" data-off="Tắt"
-                                   class="checkbox_input" data-id="{{$item->device->id_devi}}" data-id_con="{{$item->id_con}}">
+                                   class="checkbox_input" data-id="{{$item->device->id_devi}}"
+                                   data-id_con="{{$item->id_con}}">
                         </div>
                         @if($item->device->devi_value==1)
                             <script>
@@ -34,13 +39,15 @@
                 @if($item->device->device_type->max_value != null)
                     <div class="col-sm-12 col-md-6 col-lg-6 mt-2">
                         <div class="content-device">
+                            <div class="his_control text-right  "><a href="{{route('lis_his_devi',$item->id_devi)}}">Lịch sử điều khiển</a></div>
                             <label for=""
                                    class="form-group">@if($item->name_con == null)  {{$item->id_devi}} @else  {{$item->name_con}}@endif</label>
                             <span style="float: right;margin-right: 5px" class="text-right"></span>
                             <input type="range" min="{{$item->device->device_type->min_value}}"
                                    max="{{$item->device->device_type->max_value}}" name="{{$item->id_device}}"
                                    class="form-control control_device slider input_range"
-                                   value="{{$item->device->devi_value}}" data-id="{{$item->id_devi}}" data-id_con="{{$item->id_con}}">
+                                   value="{{$item->device->devi_value}}" data-id="{{$item->id_devi}}"
+                                   data-id_con="{{$item->id_con}}">
 
                         </div>
                     </div>
@@ -64,7 +71,7 @@
         <form action="{{route('mqtt')}}" method="GET" style="display: none" class="khongcantoi">
             <input id="id_devi_form" name="id_devi" value="">
             <input id="value_form" name="value" value="">
-            <button type="submit" id="btn_submit" >submit</button>
+            <button type="submit" id="btn_submit">submit</button>
         </form>
     </div>
     <script>
@@ -79,7 +86,7 @@
         })
         $('.checkbox_input').change(function () {
             var id_device = $(this).data('id');
-            var id_con= $(this).data('id_con');
+            var id_con = $(this).data('id_con');
             if ($(this).prop("checked") == true) {
 
                 // console.log(id_con);
@@ -88,7 +95,7 @@
                     console.log(data);
                 })
                 // -----------------------send to server mqtt-------------------
-                $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+1,function (data) {
+                $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/' + id_device + '/&value=' + 1, function (data) {
                     console.log('connect success');
                 })
                 // ----------------------------------------------------------------
@@ -102,7 +109,7 @@
                     console.log(data);
                 });
                 // -----------------------send to server mqtt-------------------
-                $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+0, function (data) {
+                $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/' + id_device + '/&value=' + 0, function (data) {
                     console.log('connect sucess');
                 });
                 // -----------------------send to server mqtt-------------------
@@ -114,9 +121,9 @@
         })
         $('.input_range').change(function () {
             var value = $(this).val();
-            var id_device=$(this).data('id');
-            var id_con= $(this).data('id_con');
-            console.log(value + '_'+id_device);
+            var id_device = $(this).data('id');
+            var id_con = $(this).data('id_con');
+            console.log(value + '_' + id_device);
             $.get('../control_range_process/' + id_con + '/' + value, function (data) {
                 console.log(data);
             });
@@ -125,7 +132,7 @@
             // $('#id_devi_form').val(id_device);
             // $('#value_form').val(value);
             // $('#btn_submit').click();
-            $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+value, function (data) {
+            $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/' + id_device + '/&value=' + value, function (data) {
                 console.log('connect sucess');
             });
         })

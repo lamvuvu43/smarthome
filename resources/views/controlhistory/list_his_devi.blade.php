@@ -11,17 +11,7 @@
                 </div>
             @endif
             <div class="list_device">
-                <div class="text-center pb-4 pt-3 title_edit_device">
-                   <div class="text-left  pr-3 pl-3">
-                       <label class="mb-3">Lựa chọn thiết bị để xem lịch sửa</label>
-                       <select id="select_device" class="form-control">
-                           @foreach($get_con as $item)
-                               <option value="{{$item->id_devi}}">@if($item->name_con == null) {{$item->id_devi}}@else {{$item->name_con}} @endif</option>
-                           @endforeach
-                       </select>
-                   </div>
-                </div>
-                <div class="table_device col-12 col-md-12 col-lg-12"  style="height: 450px;overflow: auto">
+                <div class="table_device col-12 col-md-12 col-lg-12" style="height: 450px;overflow: auto">
                     <table class="table text-center table-striped ">
                         <thead class="thead-dark">
                         <tr>
@@ -33,7 +23,24 @@
                         </tr>
                         </thead>
                         <tbody>
-
+                        <?php
+                        foreach ($get_con_his as $i => $item) {
+                            $i++;
+                            foreach ($item->controlhistory as $item_his) {
+                                echo "<tr>";
+                                echo "<td>" . $i . "</td>";
+                                echo "<td>" . $item_his->controller->user->full_name . "</td>";
+                                if ($item_his->controller->name_con == null) {
+                                    echo "<td>" . $item_his->controller->id_devi . "</td>";
+                                } else {
+                                    echo "<td>" . $item_his->controller->name_con . "</td>";
+                                }
+                                echo "<td>" . $item_his->con_time . "</td>";
+                                echo "<td>" . $item_his->value_input . "</td>";
+                                echo "</tr>";
+                            }
+                        }
+                        ?>
                         </tbody>
                     </table>
                 </div>
@@ -43,17 +50,5 @@
     <script>
         $('#goback').show();
         $('.header').hide(200);
-        window.onload=function () {
-            var id_con=$('#select_device').val();
-            $.get('../home/list_con_his/jquery/'+id_con,function (data) {
-                $('tbody').html(data);
-            })
-        }
-        $('#select_device').click(function () {
-            var id_con=$(this).val();
-            $.get('../home/list_con_his/jquery/'+id_con,function (data) {
-                $('tbody').html(data);
-            })
-        })
     </script>
 @endsection()

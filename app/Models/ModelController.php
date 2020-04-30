@@ -34,4 +34,7 @@ class ModelController extends Model
 //    {
 //        return $this->belongsTo('App\Models\Device', 'id_mod',groupBy(''));
 //    }
+    public  function controlhistory(){
+        return $this->hasMany('App\Models\ControlHistory','id_con');
+    }
 }

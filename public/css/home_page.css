@@ -168,7 +168,7 @@ body {
 
 /*______________________________________________________*/
 /*----------------------------------------------------------*/
-.checkbox input {
+.checkbox input[type="checkbox"] {
     position: absolute;
     float: right;
     transform: translate(90%, 0%);
@@ -611,18 +611,33 @@ body {
     /*animation-delay: 2s; !*độ trể xuất hiện*!*/
     animation-direction: reverse;
 }
+
 @keyframes caution {
-    from{
+    from {
         color: #ffed4a;
     }
     to {
         color: blue;
     }
 }
- #caution{
-     color: #97FFFF;
-     animation-name: caution;
-     animation-duration: 2s;
-     animation-iteration-count: infinite;
-     animation-direction: reverse;
- }
+
+#caution {
+    color: #97FFFF;
+    animation-name: caution;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+    animation-direction: reverse;
+}
+
+.his_control a{
+    text-decoration: none;
+    border: blue 1px solid;
+    padding: 3px;
+    background-color: #b3e8ca;
+    border-radius: 7px;
+}
+.his_control a:hover{
+    text-decoration: none;
+    background-color: white;
+    color: black;
+}

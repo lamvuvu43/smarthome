@@ -15,24 +15,29 @@ class ControlHistoryController extends Controller
         return view('controlhistory.list_con_his', compact('get_con'));
     }
 
-    public function list_con_his($id_con)
+    public function list_con_his($id_devi)
     {
-        $get_con_his = ControlHistory::where('id_con', $id_con)->get();
+        $get_con_his = ModelController::where('id_devi', $id_devi)->get();
         foreach ($get_con_his as $i=> $item) {
             $i++;
-            echo "<tr>";
-            echo "<td>".$i."</td>";
-//            echo "<td>".$item->controller->user->full_name."</td>";
-            echo "<td>";
-            if ($item->controller->name_con == null) {
-                echo $item->controller->id_devi;
-            } else {
-                echo $item->controller->name_con;
-            }
-            echo "</td>";
-            echo "<td>".$item->con_time."</td>";
-            echo "<td>".$item->value_input."</td>";
-            echo "</tr>";
+           foreach ($item->controlhistory as $item_his){
+               echo "<tr>";
+               echo "<td>".$i."</td>";
+               echo "<td>".$item_his->controller->user->full_name."</td>";
+               if($item_his->controller->name_con == null){
+                   echo "<td>".$item_his->controller->id_devi."</td>";
+               }else{
+                   echo "<td>".$item_his->controller->name_con."</td>";
+               }
+               echo "<td>".$item_his->con_time."</td>";
+               echo "<td>".$item_his->value_input."</td>";
+               echo "</tr>";
+           }
         }
+    }
+
+    public function lis_his_devi($id_devi){
+        $get_con_his = ModelController::where('id_devi', $id_devi)->get();
+        return view('controlhistory.list_his_devi',compact('get_con_his'));
     }
 }
