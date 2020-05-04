@@ -17,6 +17,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
+{{--    ------auto complete------}}
+<!-- jQuery library -->
+{{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
+
+    <!-- jQuery UI library -->
+    <link rel="stylesheet" href="{{asset('js/jquery-ui.css')}}">
+    <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 </head>
 <body>
 {{--@if(Auth::check()==false)--}}

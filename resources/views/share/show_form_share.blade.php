@@ -41,11 +41,16 @@
                             </div>
                             <div class="select-user">
                                 <label for="id_user" class="pt-2 pb-2">Chọn tài khoản chia sẻ</label>
-                                <select name="id_user" id="id_user" class="form-control">
-                                    @foreach($user as $item)
-                                        <option value="{{$item->id}}">{{$item->full_name}} - {{$item->email}}</option>
-                                    @endforeach
-                                </select>
+{{--                                <select name="id_user" id="id_user" class="form-control">--}}
+{{--                                    @foreach($user as $item)--}}
+{{--                                        <option value="{{$item->id}}">{{$item->full_name}} - {{$item->email}}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+                            <!-- For defining autocomplete -->
+                                <input type="text" id='user_search' class="form-control">
+
+                                <!-- For displaying selected option value from autocomplete suggestion -->
+                                <input type="text" id='user_id' readonly name="id_user" style="display: none">
                             </div>
                             <div class="select-per">
                                 <label for="id_per" class="pt-2 pb-2">Quyền điều khiển</label>
@@ -68,5 +73,34 @@
     <script>
         $('#goback').show();
         $('.header').hide(200);
+
+        var CSRF_TOKEN = $('meta[name="csrf-token"]').attr('content');
+        $(document).ready(function(){
+
+            $( "#user_search" ).autocomplete({
+                source: function( request, response ) {
+                    // Fetch data
+                    $.ajax({
+                        url:"{{route('autocomplete.user')}}",
+                        type: 'post',
+                        dataType: "json",
+                        data: {
+                            _token: CSRF_TOKEN,
+                            search: request.term
+                        },
+                        success: function( data ) {
+                            response( data );
+                        }
+                    });
+                },
+                select: function (event, ui) {
+                    // Set selection
+                    $('#user_search').val(ui.item.label); // display the selected text
+                    $('#user_id').val(ui.item.value); // save selected id to input
+                    return false;
+                }
+            });
+
+        });
     </script>
 @endsection
