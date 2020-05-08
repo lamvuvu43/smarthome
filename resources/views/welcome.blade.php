@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>SmartHome  @yield('pageTitle')</title>
+    <title>SmartHome @yield('pageTitle')</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
@@ -15,13 +15,14 @@
     <script src="{{asset("js/style_script_button.js")}}"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/css/bootstrap4-toggle.min.css"
+          rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 {{--    ------auto complete------}}
 <!-- jQuery library -->
 {{--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>--}}
 
-    <!-- jQuery UI library -->
+<!-- jQuery UI library -->
     <link rel="stylesheet" href="{{asset('js/jquery-ui.css')}}">
     <script src="{{asset('js/jquery-ui.min.js')}}"></script>
 </head>
@@ -183,9 +184,14 @@
                             <label class="lable_register" for="email_register">Email <span
                                     style="color: red;float: right" class="pr-3">*</span></label>
                             <input type="email" placeholder="Email" name="email_register" id="email_register"
-                                   required=""
+                                   required="" value="{{old('email_register')}}"
                                    oninvalid="this.setCustomValidity('Email không được trống')"
                                    oninput="setCustomValidity('')">
+                            @error('email_register')
+                            <script>
+                                $('#button_register').click();
+                            </script>
+                            @enderror
                         </div>
                         <div class="pass_register pb-3">
                             <lable class="lable_register" for="pass_register"> Mật khẩu <span
@@ -196,18 +202,36 @@
                                    oninput="setCustomValidity('')">
                         </div>
                         <div class="username_register pb-3">
-                            <label class="lable_register" for="username_register">Họ và tên</label>
+                            <label class="lable_register" for="username_register">Họ và tên <span
+                                    style="color: red;float: right" class="pr-3">*</span></label>
                             <input type="text" placeholder="Họ và tên" name="username_register" id="username_register"
-                                   value="">
+                                   value="{{old('username_register')}}"
+                                   required="" oninvalid="this.setCustomValidity('Vui lòng nhập họ và tên')"
+                                   oninput="this.setCustomValidity('')">
                         </div>
                         <div class="phone_register pb-3">
-                            <label class="lable_register" for="phone_register">Số điện thoại</label>
-                            <input type="text" placeholder="Số điện thoại" name="phone_register" id="phone_register">
+                            <label class="lable_register" for="phone_register">Số điện thoại <span
+                                    style="color: red;float: right" class="pr-3">*</span></label>
+                            <input type="text" placeholder="Số điện thoại" name="phone_register" id="phone_register"
+                                   value="{{old('phone_register')}}"
+                                   required="" oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại')"
+                                   oninput="this.setCustomValidity('')">
+                            @error('phone_register')
+                            <script>
+                                $('#button_register').click();
+                            </script>
+                            @enderror
                         </div>
 
                         <div class="address_register pb-3">
                             <label class="lable_register" for="address_register">Địa chỉ</label>
-                            <input type="text" placeholder="Địa chỉ:" name="address_register" id="address_register">
+                            <input type="text" placeholder="Địa chỉ:" name="address_register" id="address_register"
+                                   value="{{old('address_register')}}">
+                            @error('address_register')
+                            <script>
+                                $('#button_register').click();
+                            </script>
+                            @enderror
                         </div>
 
 

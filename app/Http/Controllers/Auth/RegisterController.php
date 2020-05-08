@@ -56,10 +56,10 @@ class RegisterController extends Controller
             'username_register' => 'required|max:30', //unique:tenbang,tencot
             'email_register' => 'required|unique:users,email|max:60',
             'phone_register' => 'required|unique:users,sdt|max:12',
-            'address_register' => 'required|max:60',
+            'address_register' => 'max:60',
             'pass_register' => 'required|min:8',
         ];
-        $messages = [
+        $message = [
             'username_register.required' => 'Họ tên không được trống',
             'email.unique' => 'Email đã tồn tại',
             'username_register.max' => 'Độ dài tối đa là 255',
@@ -68,12 +68,12 @@ class RegisterController extends Controller
             'email_register.unique' => 'Email đã tồn tại',
             'phone_register.required' => 'Vui lòng nhập số điện thoại',
             'phone_register.unique' => 'Số điện thoại đã tồn tại',
-            'address_register.required' => 'Địa chỉ không được trống',
             'pass_register.required' => 'Vui lòng nhập mật khẩu',
             'pass_register.min' => 'Mật khẩu có độ dài tối thiệu 8 kí tự',
+            'address_register.max'=>'Lỗi địa chỉ quá dài',
         ];
 //        $this->validate($request,$rules,$messages);
-        return Validator::make($request, $rules, $messages);
+        return Validator::make($request, $rules, $message);
     }
 
     /**
@@ -89,7 +89,7 @@ class RegisterController extends Controller
             'username_register' => 'required|max:30', //unique:tenbang,tencot
             'email_register' => 'required|unique:users,email|max:60',
             'phone_register' => 'required|unique:users,phone|max:10',
-            'address_register' => 'required|max:60',
+            'address_register' => 'max:60',
             'pass_register' => 'required|min:8',
         ];
         $messages = [
@@ -100,13 +100,13 @@ class RegisterController extends Controller
             'email_register.unique' => 'Email đã tồn tại',
             'phone_register.required' => 'Vui lòng nhập số điện thoại',
             'phone_register.unique' => 'Số điện thoại đã tồn tại',
-            'address_register.required' => 'Địa chỉ không được trống',
+            'address_register.max' => 'Địa chỉ quá dài',
             'pass_register.required' => 'Vui lòng nhập mật khẩu',
             'pass_register.min' => 'Mật khẩu có độ dài tối thiệu 8 kí tự',
         ];
         $validator = Validator::make($request->all(), $rules, $messages);
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->withErrors($validator)->with('fail_register')->withInput();
         } else {
 //            dd($request->all());
             User::insert([

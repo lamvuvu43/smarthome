@@ -12,7 +12,6 @@ if($id_devi !=null)
     $arr=explode("-",$id_devi);
 }
 
-
 include_once "phpMQTT.php";
 $server = "philongit.ddns.net";     // change if necessary
 $port = 1883;                     // change if necessarypo
