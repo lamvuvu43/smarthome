@@ -224,7 +224,7 @@ class AddDeviceController extends Controller
 
         $response = array();
         foreach($get_user as $item){
-            $response[] = array("value"=>$item->id,"label"=>$item->email,'full_name'=>$item->full_name);
+            $response[] = array("value"=>$item->id,"label"=>$item->email,"full_name"=>$item->full_name);
         }
 
         echo json_encode($response);

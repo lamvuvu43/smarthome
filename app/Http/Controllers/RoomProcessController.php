@@ -98,7 +98,7 @@ class RoomProcessController extends Controller
      */
     public function destroy($id)
     {
-        //
+       Room::where('id_room',$id)->delete();
     }
 
     public function list_room_edit($id_floor)

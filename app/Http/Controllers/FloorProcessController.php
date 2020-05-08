@@ -82,7 +82,7 @@ class FloorProcessController extends Controller
      */
     public function destroy($id)
     {
-        //
+       Floor::where('id_floor',$id)->delete();
     }
 
     public function list_floor_edit($id)

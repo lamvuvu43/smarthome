@@ -47,11 +47,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/home/list_floor_edit/{id}', 'FloorProcessController@list_floor_edit')->name('list_floor_edit');
     Route::get('/home/show_floor_edit/{id}', 'FloorProcessController@show_floor_edit')->name('show_floor_edit');
     Route::post('/home/floor_edit_process/{id}', 'FloorProcessController@floor_edit_process')->name('show_floor_edit.process');
+    Route::delete('/home/floor_delete_process/{id}', 'FloorProcessController@destroy')->name('delete_floor.process');
 
     Route::get('/home/floor/room/{id}', 'RoomProcessController@show')->name('list_room');
     Route::get('/home/floor/list_room_edit/{id_floor}', 'RoomProcessController@list_room_edit')->name('list_room_edit');
     Route::get('/home/floor/show_room_edit/{id_room}', 'RoomProcessController@show_room_edit')->name('show_room_edit');
     Route::post('/home/floor/show_room_edit_process/{id_room}', 'RoomProcessController@show_room_edit_process')->name('show_room_edit_process');
+    Route::delete('/home/floor/delete_room_process/{id_room}', 'RoomProcessController@destroy')->name('delete_room.process');
 
     Route::get('/home/show_form_device', 'AddDeviceController@index')->name('add_device.show');
     Route::get('/home/list_form_device', 'AddDeviceController@create')->name('list_device.show');

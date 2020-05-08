@@ -29,7 +29,7 @@
                         <div class="form-group" style="background-color: lightblue">
                             <div class="title_address_devi pt-2 pb-2 text-center">Vị trí thiết bị</div>
                             <div class="select-house">
-                                <label for="select_home" class="pb-2 pt-2">Chọn ngôi nhà</label>
+                                <label for="select_home" class="pb-2 pt-2">Thiết bị đang ở</label>
                                 @if($get_controller->room!=null)
                                     <textarea class="form-control"
                                               readonly>Nhà:<?php echo str_replace('', '', $get_controller->room->floor->house->name_house)?>-Tầng: <?php echo str_replace('', '', $get_controller->room->floor->name_floor) ?>-Phòng: <?php echo str_replace('', '', $get_controller->room->name_room)?>
