@@ -32,7 +32,6 @@
 
                         @foreach($controller as $item)
                             <tr>
-
                                 <td style="display: none">{{$item->id_con}}</td>
 
                                 <td>{{$item->id_devi}}</td>
@@ -73,25 +72,7 @@
                                 @else
                                     <td>Bạn không có quyền</td>
                                 @endif
-                                {{--                                <td class="button-delete" style="display: none"><a--}}
-                                {{--                                        href="{{route('edit_device.show',$item->id_con)}}"><i--}}
-                                {{--                                            class="fa fa-share-alt" aria-hidden="true"></i></a></td>--}}
                             </tr>
-
-                            {{--                            @if($item->id_per != 3 )--}}
-                            {{--                                <script>--}}
-                            {{--                                    // $('.so_ng_chia_se').remove();--}}
-                            {{--                                    $('.share').remove();--}}
-                            {{--                                    $('.button-delete').show(200);--}}
-                            {{--                                </script>--}}
-                            {{--                            @endif--}}
-                            {{--                            @if($item->id_per ==3)--}}
-                            {{--                                <script>--}}
-                            {{--                                    $('.so_ng_chia_se').show();--}}
-
-                            {{--                                </script>--}}
-                            {{--                            @endif--}}
-
                         @endforeach
                     </table>
                 </div>

@@ -112,7 +112,7 @@ class AddDeviceController extends Controller
     {
 //        dd($request->all());
 
-        ModelController::where('id_devi', $request['id_devi'])->update(['id_room' => $request['select_room'], 'full_name_con' => $request['full_name_devi']]);
+        ModelController::where('id_devi', $request['id_devi'])->update(['id_room' => $request['select_room'], 'name_con' => $request['name_devi']]);
         return redirect()->route('list_device.show')->with('add_success', 'Đã cập thành công');
     }
 
@@ -148,7 +148,7 @@ class AddDeviceController extends Controller
     {
         $floor = Floor::where('id_house', $id)->get();
         foreach ($floor as $item) {
-            echo "<option value='" . $item->id_floor . "'>" . $item->full_name_floor . "</option>";
+            echo "<option value='" . $item->id_floor . "'>" . $item->name_floor . "</option>";
         }
     }
 
@@ -156,7 +156,7 @@ class AddDeviceController extends Controller
     {
         $room = Room::where('id_floor', $id)->get();
         foreach ($room as $item) {
-            echo "<option value='" . $item->id_room . "'>" . $item->full_name_room . "</option>";
+            echo "<option value='" . $item->id_room . "'>" . $item->name_room . "</option>";
         }
     }
 
