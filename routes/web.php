@@ -78,10 +78,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/home/list_con_his/jquery/{id_devi}','ControlHistoryController@list_con_his');
     Route::get('/home/list_con_his/lis_his_devi/{id_devi}','ControlHistoryController@lis_his_devi')->name('lis_his_devi');
 
-    Route::get('/mqtt/{id_devi}/{value}',function(){
-    	return view('mqtt.WEB_Publish');
-    });
-
 });
 
 //

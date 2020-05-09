@@ -79,8 +79,19 @@
                     console.log(data);
                 })
                 // -----------------------send to server mqtt-------------------
-                $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+1,function (data) {
-                    console.log('connect success');
+                // $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+1,function (data) {
+                //     console.log('connect success');
+                // })
+
+                $.ajax({
+                    url:'http://127.0.0.1:8000/admin/mqtt?id_devi=' + id_device + '&value=' + 1,
+                    type:'GET',
+                    success:function () {
+                        console.log('Kết nối thành công');
+                    },
+                    error:function (e) {
+                        alert(e.responseJSON.message);
+                    }
                 })
                 // ----------------------------------------------------------------
                 // $('#id_devi_form').val(id_device);
@@ -93,9 +104,21 @@
                     console.log(data);
                 });
                 // -----------------------send to server mqtt-------------------
-                $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+0, function (data) {
-                    console.log('connect sucess');
-                });
+                // $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+0, function (data) {
+                //     console.log('connect sucess');
+                // });
+
+                $.ajax({
+                    url:'http://127.0.0.1:8000/admin/mqtt?id_devi=' + id_device + '&value=' + 0,
+                    type:'GET',
+                    success:function () {
+                        console.log('Kết nối thành công');
+                    },
+                    error:function (e) {
+                        alert(e.responseJSON.message);
+                    }
+                })
+
                 // -----------------------send to server mqtt-------------------
                 // $('#id_devi_form').val(id_device);
                 // $('#value_form').val('0');
@@ -116,9 +139,20 @@
             // $('#id_devi_form').val(id_device);
             // $('#value_form').val(value);
             // $('#btn_submit').click();
-            $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+value, function (data) {
-                console.log('connect sucess');
-            });
+            // $.get('http://127.0.0.1:8000/admin/mqtt?id_devi=/'+id_device+'/&value='+value, function (data) {
+            //     console.log('connect sucess');
+            // });
+
+            $.ajax({
+                url:'http://127.0.0.1:8000/admin/mqtt?id_devi=' + id_device + '&value=' + value,
+                type:'GET',
+                success:function () {
+                    console.log('Kết nối thành công');
+                },
+                error:function (e) {
+                    alert(e.responseJSON.message);
+                }
+            })
         })
     </script>
 @endsection
