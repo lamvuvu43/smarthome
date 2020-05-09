@@ -11,7 +11,7 @@
         <div class="col-12 col-md-12 col-lg-12 ">
             <div class="edit_device">
                 <div class="text-center pb-4 pt-3 title_edit_device">
-                    <h4 class="modal-title">Chỉnh sửa thiết bị</h4>
+                    <h4 class="modal-title">Cập nhật vị trí thiết bị</h4>
                 </div>
                 <div class="form_edit_device col-12 col-md-12 col-lg-12">
                     {{--                {{dd($get_controller)}}--}}
