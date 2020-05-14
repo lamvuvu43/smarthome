@@ -13,7 +13,7 @@ if($id_devi !=null)
 }
 
 include_once "phpMQTT.php";
-$server = "philongit.ddns.net";     // change if necessary
+$server = "philongiot.ddns.net";     // change if necessary
 $port = 1883;                     // change if necessarypo
 $username = "philong";                   // set your username
 $password = "123456";                   // set your password
