@@ -90,7 +90,7 @@
     @endif
     {{--        -----------------------------------------------------------------------------}}
     <div class="row">
-        <div class="col- col-sm-6 col-md-6 col-lg-6 menu">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-6 menu">
             @if(Auth::check()==true)
                 {{--                <a class="active" href="#home">Nhà 1</a>--}}
                 {{--                <a href="#news">Nhà 2</a>--}}
@@ -102,13 +102,14 @@
             <a id="button_show_menu"><i class="fa fa-bars" aria-hidden="true"></i></a>
             <div class="div_button_add">
                 <a class="button_add " href="{{route('add_home')}}">Thêm nhà</a>
+                <a class="button_add " href="{{route('create_floor')}}">Thêm tầng</a>
                 <a class="button_add" href="{{route('show_form_room')}}">Thêm phòng </a>
                 <a class="button_add" href="{{route('add_device.show')}}">Thêm thiết bị</a>
                 <a class="button_add" href="{{route('list_device.show')}}">Danh sách thiết bị</a>
                 <a class="button_add" href="{{route('list_house.show')}}">Danh sách ngôi nhà</a>
             </div>
         </div>
-        <div class="col- col-sm-6 col-md-6 col-lg-6 menu menu_login">
+        <div class="col-12 col-sm-6 col-md-6 col-lg-6 menu menu_login">
             <a href="{{route('list_con_his')}}">Lịch sử điều khiển</a>
             @if(Auth::check()==true)
                 <a style="text-transform: uppercase;"
@@ -197,8 +198,8 @@
                             @enderror
                         </div>
                         <div class="pass_register pb-3">
-                            <lable class="lable_register" for="pass_register"> Mật khẩu <span
-                                    style="color: red;float: right" class="pr-3">*</span></lable>
+                            <label class="lable_register" for="pass_register"> Mật khẩu <span
+                                    style="color: red;float: right" class="pr-3">*</span></label>
                             <input type="password" placeholder="*********" name="pass_register" id="pass_register"
                                    required=""
                                    oninvalid="this.setCustomValidity('Vui lòng nhập mật khẩu')"
@@ -268,6 +269,7 @@
     @yield('list_room_edit')
     @yield('edit_room')
     @yield('list_con_his')
+    @yield('create_floor')
 </div>
 <script>
     $(function () {

@@ -22,11 +22,7 @@
                             <input type="text" min="1" max="2" value="" class="form-control " placeholder="Tầng thứ mấy"
                                    id="floor"  name="floor[]">
                         </div>
-{{--                        <div class="form-group name_room pr-2 pl-2">--}}
-{{--                            <label for="room">Tên số phòng mỗi tầng</label>--}}
-{{--                            <input type="number" min="1" max="2" value="1" class="form-control" placeholder="1"--}}
-{{--                                   name="room" id="room">--}}
-{{--                        </div>--}}
+
                     </div>
                 </div>
                 <div class="form-group name_button text-right pr-1 pt-1">

@@ -48,6 +48,8 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth']], function () {
     Route::get('/home/show_floor_edit/{id}', 'FloorProcessController@show_floor_edit')->name('show_floor_edit');
     Route::post('/home/floor_edit_process/{id}', 'FloorProcessController@floor_edit_process')->name('show_floor_edit.process');
     Route::delete('/home/floor_delete_process/{id}', 'FloorProcessController@destroy')->name('delete_floor.process');
+    Route::get('/home/floor/create/floor','FloorProcessController@create')->name('create_floor');
+    Route::post('/home/floor/create/floor/process','FloorProcessController@store')->name('create_floor.store');
 
     Route::get('/home/floor/room/{id}', 'RoomProcessController@show')->name('list_room');
     Route::get('/home/floor/list_room_edit/{id_floor}', 'RoomProcessController@list_room_edit')->name('list_room_edit');
