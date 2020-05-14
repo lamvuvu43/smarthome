@@ -11,13 +11,14 @@
                 <div class="col-sm-12 col-md-6 col-lg-3 location loc-1 ">
                     <div class="get_link" style="display: none">{{route('list_floor',$item->id_house)}}</div>
                     <div class="location-content pb-3 ">{{$item->name_house}}</div>
-                    <ul class="list_floor">
+                    <div class="list_floor">Nhà có {{count($item->floor)  }} tầng</div>
+                    {{--  <ul class="list_floor">
                         @foreach($item->floor as $item_floor)
                             <li class="pt-2 pb-1">{{($item_floor->name_floor )}}
                                 Có {{count($item_floor->room) }} phòng
                             </li>
                         @endforeach
-                    </ul>
+                    </ul> --}}
                 </div>
             @endforeach
         </div>
