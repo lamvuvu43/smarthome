@@ -331,7 +331,7 @@ body {
     position: absolute;
     z-index: 1000;
     /* width: 1000px; */
-    transform: translate(0%, 50%);
+    transform: translate(0%, 70%);
     background-color: rgb(183, 197, 115);
     padding-top: 0px;
 }
@@ -350,7 +350,7 @@ body {
 .button_add {
     display: none;
     position: relative;
-    width: 15%;
+    width: 33%;
 }
 
 .count-particles {
