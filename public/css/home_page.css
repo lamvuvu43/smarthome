@@ -56,12 +56,12 @@ body {
     height: 100px;
     width: 100%;
     position: relative;
-    border: 2px solid white;
+    border: 2px solid #0066D9;
     opacity: 1;
     background-color: #5cd08d;
     display: inline-block;
     padding: 0px;
-    margin-right: 5px;
+
 }
 
 .location:hover {
@@ -90,9 +90,8 @@ body {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    border-color: #171a1d;
+    border-color: #0066D9;
 }
-
 
 .location-content {
     position: absolute;
@@ -630,15 +629,40 @@ body {
     animation-direction: reverse;
 }
 
-.his_control a{
+.his_control a {
     text-decoration: none;
     border: blue 1px solid;
     padding: 3px;
     background-color: #b3e8ca;
     border-radius: 7px;
 }
-.his_control a:hover{
+
+.his_control a:hover {
     text-decoration: none;
     background-color: white;
     color: black;
+}
+
+.add_function {
+    position: absolute;
+    top: 20%;
+    left: 40%;
+
+}
+
+.note_btn {
+    position: absolute;
+    left: 20%;
+    animation: note_btn 4s infinite;
+    animation-direction: alternate;
+
+}
+
+@keyframes note_btn {
+    from {
+        left: 20%;
+    }
+    to {
+        left: 40%;
+    }
 }

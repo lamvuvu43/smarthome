@@ -22,8 +22,6 @@
                             <label class="form-group"
                                    style="float: right">@if($item->name_con == null)  {{$item->id_devi}} @else  {{$item->name_con}}@endif
                             </label>
-
-
                             <input type="checkbox" data-toggle="toggle" data-on="Mở" data-off="Tắt"
                                    class="checkbox_input" data-id="{{$item->device->id_devi}}"
                                    data-id_con="{{$item->id_con}}">
@@ -82,7 +80,6 @@
             $(this).parent().find("span").show();
             $(this).parent().find("span").html($(this).val())
             $(this).parent().find("span").hide(1000);
-
         })
         $('.checkbox_input').change(function () {
             var id_device = $(this).data('id');

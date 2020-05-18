@@ -293,6 +293,12 @@
     })
     $('#goback').click(function () {
         window.history.back();
+    });
+    $('.add_function').mouseover(function () {
+        $(this).parent().find('.note_btn').show(500);
+    });
+    $(document).on('mouseover','.add_function',function () {
+        $(this).parent().find('.note_btn').show(500);
     })
 </script>
 @if(Auth::check()==false)
