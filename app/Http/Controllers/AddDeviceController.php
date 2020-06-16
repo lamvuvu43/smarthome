@@ -11,6 +11,7 @@ use App\Models\House;
 use App\Models\Permission;
 use App\Models\Room;
 use App\Models\ModelController;
+use App\Models\ControlHistory;
 use App\Models\User;
 use Highlight\Mode;
 use Illuminate\Http\Request;
@@ -110,9 +111,12 @@ class AddDeviceController extends Controller
      */
     public function update(Request $request)
     {
-//        dd($request->all());
-
-        ModelController::where('id_devi', $request['id_devi'])->update(['id_room' => $request['select_room'], 'name_con' => $request['name_devi']]);
+    //    dd($request->all());
+        if($request['select_room'] != null){
+            ModelController::where('id_devi', $request['id_devi'])->update(['id_room' => $request['select_room'], 'name_con' => $request['name_devi']]);
+        }else{
+            return redirect()->back()->with('add_fail', 'Lỗi không tìm thấy phòng');
+        }
         return redirect()->route('list_device.show')->with('add_success', 'Đã cập thành công');
     }
 
@@ -132,7 +136,14 @@ class AddDeviceController extends Controller
         $get_id_devi_by_mac = Device::where('mac', $get_mac->mac)->get();
 
         foreach ($get_id_devi_by_mac as $item) {
-            ModelController::where('id_devi', $item->id_devi)->delete();
+            $get_id_con =  ModelController::where('id_devi', $item->id_devi)->first();
+            if($get_id_con ==null){
+                continue;
+            }else{
+                ControlHistory::where('id_con',$get_id_con->id_con)->delete();
+                ModelController::where('id_devi', $item->id_devi)->delete();
+            }
+           
 //            echo $item->id_devi;
 //            break;
         }
@@ -208,9 +219,14 @@ class AddDeviceController extends Controller
 
     public function show_form_share_process(Request $request, $id_con)
     {
-//        dd($request->all());
-        ModelController::insert(['id_user'=>$request['id_user'],'id_per'=>$request['id_per'],'id_devi'=>$request['id_devi']]);
-        return redirect()->route('list_device.show')->with('add_success', 'Đã chia sẽ thiết bị thành công');
+    //    dd($request->all());
+       if($request['id_user']==null){
+        return redirect()->back()->with('add_fail', 'Tài khoản email người được chia sẽ không tìm thấy');
+       }else{
+            ModelController::insert(['id_user'=>$request['id_user'],'id_per'=>$request['id_per'],'id_devi'=>$request['id_devi']]);
+            return redirect()->route('list_device.show')->with('add_success', 'Đã chia sẽ thiết bị thành công');
+       }
+        
     }
 
     public  function autocomplete(Request $request){

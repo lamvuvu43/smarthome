@@ -2,13 +2,25 @@
 @section('pageTitle','Chỉnh sửa thiết bị')
 @section('edit_device')
     <div class="row">
-        @if (session('add_success'))
+        <div class="col-12 col-md-12 col-lg-12">
+            @if (session('add_success'))
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">x</button>
                 {{ session('add_success') }}
             </div>
         @endif
-        <div class="col-12 col-md-12 col-lg-12 ">
+        </div>
+        
+        <div class="col-12 col-md-12 col-lg-12">
+            @if (session('add_fail'))
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                {{ session('add_fail') }}
+            </div>
+        @endif
+        </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12" style="position: relative;width:100%">
             <div class="edit_device">
                 <div class="text-center pb-4 pt-3 title_edit_device">
                     <h4 class="modal-title">Cập nhật vị trí thiết bị</h4>
@@ -47,7 +59,8 @@
                             <div class="select-floor">
                                 <label for="select_floor" class="pb-2 pt-2">Chọn tầng của ngôi nhà</label>
                                 <select name="select_floor" id="select_floor" class="form-control pb-2 pt-2">
-
+                                   
+                                    
                                 </select>
                             </div>
                             <div class="select-room">

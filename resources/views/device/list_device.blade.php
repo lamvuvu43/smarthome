@@ -155,7 +155,7 @@
         var id_con = $('#id_con').html();
         var token = $("meta[name='csrf-token']").attr("content");
         $.ajax({
-            url: "../home/delete_con/" + id_con
+            url: "{{route('delete.process','')}}/" + id_con
             , type: 'DELETE'
             , data: {
                 "id": id_con
@@ -164,6 +164,9 @@
             , success: function(data) {
                 console.log(data);
                 window.location.reload();
+            },error:function(e){
+                // alert('Có lỗi, không thể xoá');
+                console.log(e.responseJSON.message)
             }
         , });
         // $("#" + id).parent().hide(400);
@@ -183,16 +186,19 @@
         for (i = 0; i < amount_class; i++) {
             var id_device = $('.amount_share:eq(' + i + ')').html();
 
-            $('.amount_share:eq(' + i + ')').addClass(id_device);
-            change_amount(id_device);
+            $('.amount_share:eq(' + i + ')').addClass('a'+i);
+            change_amount(id_device,i);
             // console.log('in i' + id_device);
         }
 
-        function change_amount(id_device) {
-            $('.' + id_device + '').show(300);
+        function change_amount(id_device,i) {
+           
+            $('.' + id_device).show(300);
             $.get('../home/add_amount/' + id_device, function(data) {
-                dataPlus = '<a class="btn btn-link" href="http://127.0.0.1:8000/admin/home/list_share/' + id_device + '">' + data + '</a>';
-                $('.' + id_device + '').html(dataPlus);
+               
+                dataPlus = '<a class="btn btn-link" href="{{route('list.share.show','')}}/'+id_device+'" >' + data + '</a>';
+             
+                $('.a' + i).html(dataPlus);
             });
         }
     }

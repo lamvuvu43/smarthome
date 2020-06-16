@@ -127,7 +127,7 @@
     <div class="row">
         <div class="col- col-sm-12 col-md-12 col-lg-12 header">
             <h2 class="text-center pt-3 pb-3">Welcomee to Smart Home</h2>
-            <p class="text-center font-weight-bold">Đơn giản, danh choáng, tiện lợi</p>
+            <p class="text-center font-weight-bold">Đơn giản, nhanh choáng, tiện lợi</p>
         </div>
     </div>
     <div id="loginModal" class="modal fade" role="dialog">

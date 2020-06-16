@@ -2,12 +2,27 @@
 @section('pageTitle','Chia sẻ thiết bị')
 @section('show_form_share')
     <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
         @if (session('add_success'))
             <div class="alert alert-success">
                 <button type="button" class="close" data-dismiss="alert">x</button>
                 {{ session('add_success') }}
             </div>
         @endif
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+            @if (session('add_fail'))
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">x</button>
+                {{ session('add_fail') }}
+            </div>
+        @endif
+        </div>
+       
+    </div>
+    <div class="row">
         <div class="col-12 col-md-12 col-lg-12 ">
             <div class="edit_device">
                 <div class="text-center pb-4 pt-3 title_edit_device">
